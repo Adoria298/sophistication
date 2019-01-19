@@ -7,13 +7,13 @@
 		"P": {
 			"img": "images/plains.png"
 		},
-			"W": {
+		"W": {
 			"img": "images/water.png"
 		},
-			"D": {
+		"D": {
 			"img": "images/desert.png"
 		},
-			"M": {
+		"M": {
 			"img": "images/mountains.png"
 		}
 	}

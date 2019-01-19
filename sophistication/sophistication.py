@@ -13,13 +13,17 @@ class Sophistication(arcade.Window):
     """
 Main game class.
 """
-    def __init__(self):
+    def __init__(self, *mods_to_load):
         """
 Starts the game setup processes.
 """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
 
+        for mod in mods_to_load:
+            mods.load_mod(mod)
         self.tile_defs = mods.tile_defs
+        self.namespaces = mods.namespace_defs
+
         #TODO(adoria298): Allow csv files/choosing maps
         self.map = [
             ["M", "M", "M", "M", "M", "D", "D", "D"],
@@ -44,7 +48,9 @@ Starts the game setup processes.
     def prepare_tile_list(self):
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
-                tile = arcade.Sprite(self.tile_defs.get(symbol, "unknown.png"), TILE_SCALING)
+                tile = arcade.Sprite(
+                    self.tile_defs.get(symbol, "U").get("img", "unknown.png"), 
+                    TILE_SCALING)
                 
                 tile.right = (1 + symbol_index) * 64
                 tile.top = (8 - row_index) * 64
@@ -97,5 +103,5 @@ game logic.
 
 
 if __name__ == "__main__":
-    game = Sophistication()
+    game = Sophistication('./sophistication/default')
     arcade.run()
