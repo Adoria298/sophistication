@@ -1,0 +1,14 @@
+{
+	"P": {
+		"img": "default:images/plains.png"
+	},
+        "W": {
+		"img": "default:images/water.png"
+	},
+        "D": {
+		"img": "default:images/desert.png"
+	},
+        "M": {
+		"img": "default:images/mountains.png"
+	}
+}

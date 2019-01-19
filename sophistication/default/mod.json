@@ -1,0 +1,20 @@
+{
+	"name": "Sophistication",
+	"author": "Adoria298",
+	"desc": "Default mod for Sophistication (contains all the basics.",
+	"soph_namespace": "default",
+	"tile_defs": {
+		"P": {
+			"img": "images/plains.png"
+		},
+			"W": {
+			"img": "images/water.png"
+		},
+			"D": {
+			"img": "images/desert.png"
+		},
+			"M": {
+			"img": "images/mountains.png"
+		}
+	}
+}
