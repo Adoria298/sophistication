@@ -6,8 +6,7 @@ import mods
 SCREEN_WIDTH, SCREEN_HEIGHT = 512, 512
 GAME_TITLE = "Sophistication"
 TILE_SCALING = 0.5
-PLAYER_SCALING = 1
-
+PLAYER_SCALING = 0.5
 
 class Sophistication(arcade.Window):
     """
@@ -41,7 +40,7 @@ Starts the game setup processes.
         self.score = 0
         self.game_over = False
 
-        self.player = arcade.Sprite("./sophistication/player.png", PLAYER_SCALING, 0, 0, center_x=128, center_y=128)
+        self.player = arcade.Sprite("./sophistication/player.png", PLAYER_SCALING, 0, 0, center_x=160, center_y=160)
 
         self.prepare_tile_list()
 
@@ -71,7 +70,7 @@ Draws everything to the screen.
 
         # draw map and player
         self.tile_list.draw()
-        #self.player.draw()
+        self.player.draw()
 
 
         # display score
