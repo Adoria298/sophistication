@@ -1,12 +1,18 @@
-import json
+import json, os
 import arcade
 
 import mods
+from player import Player
+
+# sets the working directory to the same directory as where this code is saved.
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 512, 512
 GAME_TITLE = "Sophistication"
 TILE_SCALING = 0.5
 PLAYER_SCALING = 0.5
+
+MOVEMENT_SPEED = 5
 
 class Sophistication(arcade.Window):
     """
@@ -40,7 +46,7 @@ Starts the game setup processes.
         self.score = 0
         self.game_over = False
 
-        self.player = arcade.Sprite("./sophistication/player.png", PLAYER_SCALING, 0, 0, center_x=160, center_y=160)
+        self.player = Player(PLAYER_SCALING)
 
         self.prepare_tile_list()
 
@@ -89,18 +95,32 @@ Draws everything to the screen.
 game logic.
 """
         # for time based scoring
-        self.delta_times.append(delta_time)
-        print(f"Total time: {sum(self.delta_times)}")
+        #self.delta_times.append(delta_time)
+        #print(f"Total time: {sum(self.delta_times)}")
 
 
-        # all after here stay at the end of the function
-        self.gen_score()
+        # all after here stay at the end of the functionself.gen_score()
         
         # if negative score - empire collapse
         if self.score < 0:
             self.game_over = True
 
+        self.player.update()
+
+    def on_key_press(self, key, modifiers):
+        """
+        Called upon key press.
+        """
+        if key == arcade.key.UP:
+            self.change_y = MOVEMENT_SPEED
+        elif key == arcade.key.DOWN:
+            self.change_y = -MOVEMENT_SPEED
+        elif key == arcade.key.LEFT:
+            self.change_x = MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.change_x = -MOVEMENT_SPEED
+
 
 if __name__ == "__main__":
-    game = Sophistication('./sophistication/default')
+    game = Sophistication('./default')
     arcade.run()
