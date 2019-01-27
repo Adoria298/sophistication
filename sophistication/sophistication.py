@@ -41,7 +41,7 @@ Starts the game setup processes.
         self.score = 0
         self.game_over = False
 
-        #self.player = arcade.Sprite("images/player.png", PLAYER_SCALING, 0, 0, center_x=256, center_y=256)
+        self.player = arcade.Sprite("./sophistication/player.png", PLAYER_SCALING, 0, 0, center_x=128, center_y=128)
 
         self.prepare_tile_list()
 
