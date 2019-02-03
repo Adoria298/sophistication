@@ -10,12 +10,12 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 class Sophistication(arcade.Window):
     """
-Main game class.
-"""
+    Main game class.
+    """
     def __init__(self, *mods_to_load):
         """
-Starts the game setup processes.
-"""
+        Starts the game setup processes.
+        """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
 
         # mod loading
@@ -38,6 +38,7 @@ Starts the game setup processes.
         self.tile_list = arcade.SpriteList()
         self.prepare_tile_list()
 
+        # initialises score
         self.delta_times = []
         self.score = 0
         self.game_over = False
@@ -45,6 +46,9 @@ Starts the game setup processes.
         self.player = Player(PLAYER_SCALING)
 
     def prepare_tile_list(self):
+        """
+        Adds every tile to self.tile_list as an sprite image.
+        """
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
                 tile = arcade.Sprite(
@@ -63,8 +67,8 @@ Starts the game setup processes.
 
     def on_draw(self):
         """
-Draws everything to the screen.
-"""
+        Draws everything to the screen.
+        """
         arcade.start_render()
 
         # draw map and player
@@ -85,8 +89,8 @@ Draws everything to the screen.
 
     def update(self, delta_time):
         """
-game logic.
-"""
+        game logic.
+        """
         # for time based scoring
         #self.delta_times.append(delta_time)
         #print(f"Total time: {sum(self.delta_times)}")
@@ -102,6 +106,7 @@ game logic.
         """
         Called upon key press.
         """
+        # player movement
         if key == arcade.key.UP:
             self.player.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
