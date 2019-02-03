@@ -112,13 +112,13 @@ game logic.
         Called upon key press.
         """
         if key == arcade.key.UP:
-            self.change_y = MOVEMENT_SPEED
+            self.player.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
-            self.change_y = -MOVEMENT_SPEED
+            self.player.change_y = -MOVEMENT_SPEED
         elif key == arcade.key.LEFT:
-            self.change_x = MOVEMENT_SPEED
+            self.player.change_x = MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
-            self.change_x = -MOVEMENT_SPEED
+            self.player.echange_x = -MOVEMENT_SPEED
 
 
 if __name__ == "__main__":
