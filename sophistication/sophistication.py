@@ -110,9 +110,9 @@ game logic.
         elif key == arcade.key.DOWN:
             self.player.change_y = -MOVEMENT_SPEED
         elif key == arcade.key.LEFT:
-            self.player.change_x = MOVEMENT_SPEED
-        elif key == arcade.key.RIGHT:
             self.player.change_x = -MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.player.change_x = MOVEMENT_SPEED
 
 
 if __name__ == "__main__":
