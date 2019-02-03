@@ -1,4 +1,5 @@
 import arcade
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Player(arcade.Sprite):
     def __init__(self, scaling):
@@ -12,6 +13,10 @@ class Player(arcade.Sprite):
     def update(self):
         self.center_x += self.change_x
         self.center_y += self.change_y
+        if self.center_x >= SCREEN_WIDTH:
+            self.center_x = SCREEN_WIDTH-128
+        if self.center_y >= SCREEN_HEIGHT:
+            self.center_y = SCREEN_HEIGHT-128
 
 
 

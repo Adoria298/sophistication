@@ -2,17 +2,11 @@ import json, os
 import arcade
 
 import mods
-from player import Player
+from player import Player 
+from constants import *
 
 # sets the working directory to the same directory as where this code is saved.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-SCREEN_WIDTH, SCREEN_HEIGHT = 512, 512
-GAME_TITLE = "Sophistication"
-TILE_SCALING = 0.5
-PLAYER_SCALING = 0.5
-
-MOVEMENT_SPEED = 5
 
 class Sophistication(arcade.Window):
     """
@@ -118,7 +112,7 @@ game logic.
         elif key == arcade.key.LEFT:
             self.player.change_x = MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
-            self.player.echange_x = -MOVEMENT_SPEED
+            self.player.change_x = -MOVEMENT_SPEED
 
 
 if __name__ == "__main__":
