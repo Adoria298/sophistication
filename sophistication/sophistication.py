@@ -34,6 +34,7 @@ class Sophistication(arcade.Window):
 
         # map loading
         #TODO(adoria298): Allow csv files/choosing maps
+        #TODO(adoria298): allow map state to be saved
         self.map = [
             ["M", "M", "M", "M", "M", "D", "D", "D"],
             ["P", "M", "M", "M", "D", "D", "D", "D"],
@@ -60,6 +61,7 @@ class Sophistication(arcade.Window):
         Adds every tile to self.tile_list as a sprite image.
         Makes a grid of 8x8 tiles, each at 64 pixels.
         """
+        #TODO(adoria298): make each tile into a Tile object
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
                 tile = arcade.Sprite(
@@ -110,6 +112,9 @@ class Sophistication(arcade.Window):
         if self.score < 0:
             self.game_over = True
 
+        #TODO(adoria298): add structures
+        #TODO(adoria298): add decay logic
+
         self.player.update()
 
     def on_key_press(self, key, modifiers):
@@ -125,6 +130,9 @@ class Sophistication(arcade.Window):
             self.player.change_x = -MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
             self.player.change_x = MOVEMENT_SPEED
+        
+        #TODO(adoria298): add develop logic
+        #TODO(adoria298): add save logic
 
 
 if __name__ == "__main__":
