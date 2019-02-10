@@ -1,7 +1,7 @@
 {
 	"name": "Sophistication",
 	"author": "Adoria298",
-	"desc": "Default mod for Sophistication (contains all the basics.",
+	"desc": "Default mod for Sophistication (contains all the basics).",
 	"soph_namespace": "default",
 	"tile_defs": {
 		"P": {
