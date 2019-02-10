@@ -1,6 +1,11 @@
-import json, os
+# python standard libraries
+import json 
+import os
+
+# external libraries
 import arcade
 
+# homemade libraries
 import mods
 from player import Player 
 from constants import *
@@ -10,11 +15,14 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 class Sophistication(arcade.Window):
     """
-    Main game class.
+    A game of Sophistication. No glamour.
     """
     def __init__(self, *mods_to_load):
         """
-        Starts the game setup processes.
+        Initialises a game.
+        
+        *mods_to_load : valid mods that should be loaded. Game will crash if
+         a mod is not valid.
         """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
 
@@ -24,6 +32,7 @@ class Sophistication(arcade.Window):
         self.tile_defs = mods.tile_defs
         self.namespaces = mods.namespace_defs
 
+        # map loading
         #TODO(adoria298): Allow csv files/choosing maps
         self.map = [
             ["M", "M", "M", "M", "M", "D", "D", "D"],
@@ -38,16 +47,18 @@ class Sophistication(arcade.Window):
         self.tile_list = arcade.SpriteList()
         self.prepare_tile_list()
 
-        # initialises score
+        # initialises score functionality
         self.delta_times = []
         self.score = 0
         self.game_over = False
 
+        # initialises the player
         self.player = Player(PLAYER_SCALING)
 
     def prepare_tile_list(self):
         """
-        Adds every tile to self.tile_list as an sprite image.
+        Adds every tile to self.tile_list as a sprite image.
+        Makes a grid of 8x8 tiles, each at 64 pixels.
         """
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
@@ -85,7 +96,6 @@ class Sophistication(arcade.Window):
             out_text = "Game Over! Thank You For Playing!"
             arcade.draw_text(out_text, 60, 250, arcade.color.BLACK, 20)
         
-        arcade.finish_render()
 
     def update(self, delta_time):
         """

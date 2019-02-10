@@ -13,7 +13,7 @@ def is_mod(folder_path):
     folder_path = pathlib.Path(folder_path)
     if (folder_path/"mod.json").exists():
         if "soph_namespace" in json.load(open(folder_path / "mod.json")):
-            return True, "is-mod"
+            return True, "valid-mod"
         else:
             return False, "no-namespace"
     else:
@@ -33,4 +33,4 @@ def load_mod(folder_path):
     tile_defs.update(mod_tile_defs)
     
     
-#TODO(adoria298): continue with mod work until game works.
+
