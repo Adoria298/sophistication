@@ -28,6 +28,7 @@ class Player(arcade.Sprite):
             self.center_x = -SCREEN_WIDTH-128
         if self.center_y <= -SCREEN_HEIGHT:
             self.center_y = -SCREEN_HEIGHT-128
-
+        self.change_x = 0
+        self.change_y = 0
 
 
