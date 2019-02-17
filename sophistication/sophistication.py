@@ -104,9 +104,9 @@ class Sophistication(arcade.Window):
         game logic.
         """
         # for time based scoring
-        #self.delta_times.append(delta_time)
-        #print(f"Total time: {sum(self.delta_times)}")
-        # all after here stay at the end of the function self.gen_score()
+        self.delta_times.append(delta_time)
+        self.gen_score()
+        # all after here stay at the end of the function
         
         # if negative score - empire collapse
         if self.score < 0:
