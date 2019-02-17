@@ -59,10 +59,9 @@ class Sophistication(arcade.Window):
 
     def prepare_tile_list(self):
         """
-        Adds every tile to self.tile_list as a sprite image.
+        Adds every tile to self.tile_list as a Tile instance.
         Makes a grid of 8x8 tiles, each at 64 pixels.
         """
-        #TODO(adoria298): make each tile into a Tile object
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
                 tile = Tile(symbol, TILE_SCALING)               
