@@ -1,5 +1,6 @@
 # python standard libraries
-import json 
+import json
+import csv 
 import os
 
 # external libraries
@@ -18,7 +19,7 @@ class Sophistication(arcade.Window):
     """
     A game of Sophistication. No glamour.
     """
-    def __init__(self, *mods_to_load):
+    def __init__(self, map_file, map_type="csv", *mods_to_load):
         """
         Initialises a game.
         
@@ -34,8 +35,14 @@ class Sophistication(arcade.Window):
         self.namespaces = mods.namespace_defs
 
         # map loading
-        #TODO(adoria298): Allow csv files/choosing maps
-        #TODO(adoria298): allow map state to be saved
+        #TODO(adoria298): Fix csv map loading
+        #TODO(adoria298): allow map state to be saved (pickle?)
+        if (map_file.endswith(".csv")
+            or map_type=="csv"):
+            self.map = csv.reader(open(map_file))
+        else: 
+            raise TypeError("Invalid map.")
+        """
         self.map = [
             ["M", "M", "M", "M", "M", "D", "D", "D"],
             ["P", "M", "M", "M", "D", "D", "D", "D"],
@@ -46,6 +53,9 @@ class Sophistication(arcade.Window):
             ["P", "P", "P", "W", "W", "W", "W", "W"],
             ["P", "P", "W", "W", "W", "W", "W", "W"]
         ]
+        """
+        print([i for i in self.map])
+        print(self.tile_defs)
         self.tile_list = arcade.SpriteList()
         self.prepare_tile_list()
 
@@ -64,7 +74,7 @@ class Sophistication(arcade.Window):
         """
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
-                tile = Tile(symbol, TILE_SCALING)               
+                tile = Tile(symbol, TILE_SCALING, self.tile_defs)               
                 tile.right = (1 + symbol_index) * 64
                 tile.top = (8 - row_index) * 64
                 
@@ -134,5 +144,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication('./default')
+    game = Sophistication("map.csv", "csv", "./default")
     arcade.run()
