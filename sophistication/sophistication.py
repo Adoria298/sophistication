@@ -8,6 +8,7 @@ import arcade
 # homemade libraries
 import mods
 from player import Player 
+from tile import Tile
 from constants import *
 
 # sets the working directory to the same directory as where this code is saved.
@@ -64,9 +65,7 @@ class Sophistication(arcade.Window):
         #TODO(adoria298): make each tile into a Tile object
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
-                tile = arcade.Sprite(
-                    self.tile_defs.get(symbol, "U").get("img", "unknown.png"), 
-                    TILE_SCALING)                
+                tile = Tile(symbol, TILE_SCALING)               
                 tile.right = (1 + symbol_index) * 64
                 tile.top = (8 - row_index) * 64
                 
