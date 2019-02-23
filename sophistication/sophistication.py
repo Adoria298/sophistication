@@ -39,7 +39,7 @@ class Sophistication(arcade.Window):
         #TODO(adoria298): allow map state to be saved (pickle?)
         if (map_file.endswith(".csv")
             or map_type=="csv"):
-            self.map = csv.reader(open(map_file))
+            self.map = list(csv.reader(open(map_file)))
         else: 
             raise TypeError("Invalid map.")
         """
