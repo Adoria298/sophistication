@@ -35,25 +35,13 @@ class Sophistication(arcade.Window):
         self.namespaces = mods.namespace_defs
 
         # map loading
-        #TODO(adoria298): Fix csv map loading
         #TODO(adoria298): allow map state to be saved (pickle?)
         if (map_file.endswith(".csv")
             or map_type=="csv"):
             self.map = list(csv.reader(open(map_file)))
         else: 
             raise TypeError("Invalid map.")
-        """
-        self.map = [
-            ["M", "M", "M", "M", "M", "D", "D", "D"],
-            ["P", "M", "M", "M", "D", "D", "D", "D"],
-            ["P", "P", "M", "D", "D", "D", "D", "D"],
-            ["W", "W", "W", "W", "D", "D", "D", "D"],
-            ["P", "P", "P", "W", "W", "D", "D", "D"],
-            ["P", "P", "P", "P", "W", "W", "D", "W"],
-            ["P", "P", "P", "W", "W", "W", "W", "W"],
-            ["P", "P", "W", "W", "W", "W", "W", "W"]
-        ]
-        """
+
         print([i for i in self.map])
         print(self.tile_defs)
         self.tile_list = arcade.SpriteList()
