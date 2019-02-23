@@ -42,8 +42,6 @@ class Sophistication(arcade.Window):
         else: 
             raise TypeError("Invalid map.")
 
-        print([i for i in self.map])
-        print(self.tile_defs)
         self.tile_list = arcade.SpriteList()
         self.prepare_tile_list()
 
