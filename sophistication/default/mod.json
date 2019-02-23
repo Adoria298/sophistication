@@ -5,7 +5,15 @@
 	"soph_namespace": "default",
 	"tile_defs": {
 		"P": {
-			"img": "images/plains.png"
+			"img": "images/plains.png",
+			"struct": [
+				{
+					"img": "images/plains_structs/village.png",
+					"imm_score": 100,
+					"over_time_score": 99,
+					"decrease": 1
+				}
+			]
 		},
 		"W": {
 			"img": "images/water.png"
