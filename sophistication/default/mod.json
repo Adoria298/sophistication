@@ -7,6 +7,7 @@
 		"P": {
 			"img": "images/plains.png",
 			"struct": [
+				null,
 				{
 					"img": "images/plains_structs/village.png",
 					"imm_score": 100,

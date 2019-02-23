@@ -124,8 +124,10 @@ class Sophistication(arcade.Window):
             self.player.change_x = -MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
             self.player.change_x = MOVEMENT_SPEED
+        elif key == arcade.key.ENTER:
+            pass
+            #TODO(adoria298): work out which tile the player's on and call its develop method.
         
-        #TODO(adoria298): add develop logic
         #TODO(adoria298): add save logic
 
 

@@ -8,13 +8,14 @@ A player can develop a structure by pressing enter upon the structure. This may 
 
 ## Representation by Mods
 
-A structure should be represented as an array named `struct` in a tile definition. Each element of the array will be a level of structure. Every tile starts out with no structure, and returns to no structure.
+A structure should be represented as an array named `struct` in a tile definition. Each element of the array will be a level of structure. Every tile starts out with no structure, and returns to no structure. Element 0 of the `struct` array is `null` because the beginning of a structure is nothing.
 
 Example:
 
 ```json
 "P": {
     "struct": [
+        null,
         {
             "img": "struct1.png",
             "imm_score": 100,
