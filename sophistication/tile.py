@@ -2,6 +2,7 @@ import arcade
 
 from constants import TILE_SCALING
 
+
 class Tile(arcade.Sprite):
     """ 
     A single tile, ready to be drawn and placed.

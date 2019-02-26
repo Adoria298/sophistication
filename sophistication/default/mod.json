@@ -6,7 +6,7 @@
 	"tile_defs": {
 		"P": {
 			"img": "images/plains.png",
-			"struct": [
+			"structs": [
 				null,
 				{
 					"img": "images/plains_structs/village.png",

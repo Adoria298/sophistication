@@ -14,7 +14,7 @@ Example:
 
 ```json
 "P": {
-    "struct": [
+    "structs": [
         null,
         {
             "img": "struct1.png",
