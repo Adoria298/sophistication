@@ -22,10 +22,21 @@ class Tile(arcade.Sprite):
                             TILE_SCALING)
 
         self.struct_level = 0
+        self.struct = False
 
     def develop(self):
+        if self.tile_def.get("structs", False):
+            print("Developing structure.")
+        else:
+            print("No structure found for this tile.")
+            return None
+        
         self.struct_level += 1
-        self.struct_def = self.tile_def["struct"][self.struct_level]
+        if self.struct_level > len(self.tile_def["structs"])-1:
+            self.struct_level -= 1
+            return None
+
+        self.struct_def = self.tile_def["structs"][self.struct_level]
         self.struct_img = self.struct_def.get("img", None)
         if self.struct_img == None:
             return None
@@ -33,6 +44,16 @@ class Tile(arcade.Sprite):
         self.struct = arcade.Sprite(self.struct_img, TILE_SCALING)
         self.struct.center_x = self.center_x
         self.struct.center_y = self.center_y
+        self.struct.draw()
+
+    def update(self):
+        if self.struct:
+            self.struct.update()
+
+    def draw(self):
+        super().draw()
+        if self.struct:
+            self.struct.draw()
 
 if __name__ == "__main__":
     tile = Tile("U", 0.5)

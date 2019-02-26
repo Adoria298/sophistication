@@ -110,6 +110,9 @@ class Sophistication(arcade.Window):
         #TODO(adoria298): add decay logic
 
         self.player.update()
+        self.tile_list.update()
+
+        self.on_draw()
 
     def on_key_press(self, key, modifiers):
         """
