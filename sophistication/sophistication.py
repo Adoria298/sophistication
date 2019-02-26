@@ -60,7 +60,7 @@ class Sophistication(arcade.Window):
         """
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
-                tile = Tile(symbol, TILE_SCALING, self.tile_defs)               
+                tile = Tile(symbol, self.tile_defs)               
                 tile.right = (1 + symbol_index) * 64
                 tile.top = (8 - row_index) * 64
                 
@@ -125,8 +125,8 @@ class Sophistication(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.player.change_x = MOVEMENT_SPEED
         elif key == arcade.key.ENTER:
-            pass
-            #TODO(adoria298): work out which tile the player's on and call its develop method.
+            closest_tile = arcade.get_closest_sprite(self.player, self.tile_list)[0] # second element is its distance to the player
+            closest_tile.develop()
         
         #TODO(adoria298): add save logic
 
