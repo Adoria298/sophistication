@@ -76,6 +76,7 @@ class Sophistication(arcade.Window):
         """
         Draws everything to the screen.
         """
+        #TODO(adoria298): draw structures.
         arcade.start_render()
 
         # draw map and player
@@ -106,7 +107,7 @@ class Sophistication(arcade.Window):
         if self.score < 0:
             self.game_over = True
 
-        #TODO(adoria298): add structures
+        #TODO(adoria298): add structure scoring
         #TODO(adoria298): add decay logic
 
         self.player.update()

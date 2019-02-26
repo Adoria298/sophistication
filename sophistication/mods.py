@@ -27,6 +27,7 @@ def load_mod(folder_path):
     mod = json.load(open(mod_def))
     namespace_defs[mod["soph_namespace"]] = folder_path
     mod_tile_defs = mod["tile_defs"]
+    # TODO(adoria298): Put this bit into some functions
     # creates full path to each tile image
     for tile_sym in mod_tile_defs:
         mod_tile_defs[tile_sym]["img"] = folder_path + "/" + mod_tile_defs[tile_sym]["img"]

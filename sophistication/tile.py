@@ -21,6 +21,8 @@ class Tile(arcade.Sprite):
         super().__init__(self.tile_def.get("img", "unknown.png"),
                             TILE_SCALING)
 
+        # all code past this point is about structures.
+        # TODO(adoria298): make structures work as outlined!
         self.struct_level = 0
         self.struct = False
 
