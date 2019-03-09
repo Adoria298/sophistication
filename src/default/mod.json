@@ -5,7 +5,6 @@
 	"soph_namespace": "default",
 	"tile_defs": {
 		"P": {
-			"img": "images/plains.png",
 			"struct": [
 				{
 					"img": "images/plains/plains.png",    
@@ -29,13 +28,25 @@
 			]
 		},
 		"W": {
-			"img": "images/water.png"
+			"struct": [
+				{
+					"img": "images/water.png"
+				}
+			]
 		},
 		"D": {
-			"img": "images/desert.png"
+			"struct": [
+				{
+					"img": "images/desert.png"
+				}
+			]
 		},
 		"M": {
-			"img": "images/mountains.png"
+			"struct": [
+				{
+					"img": "images/mountains.png"
+				}
+			]
 		}
 	}
 }
