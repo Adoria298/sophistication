@@ -1,5 +1,6 @@
 import json
 import pathlib
+import os
 
 # mod definitions
 namespace_defs = {}
@@ -31,10 +32,10 @@ def load_mod(folder_path):
     # creates full path to each tile image
     for tile_sym in mod_tile_defs:
         tile_def = mod_tile_defs[tile_sym]
-        if tile_def.get("structs", False):
-            for struct in tile_def["structs"]:
+        if tile_def.get("struct", False):
+            for struct in tile_def["struct"]:
                 if struct != None:
-                    struct["img"] = os.abspath(f"{folder_path}/{struct['img']}")
+                    struct["img"] = os.path.abspath(f"{folder_path}/{struct['img']}")
     tile_defs.update(mod_tile_defs)
     
     

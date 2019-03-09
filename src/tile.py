@@ -27,10 +27,11 @@ class Tile(arcade.Sprite):
             struct_img = arcade.draw_commands.load_texture(struct["img"])
             self.append_texture(struct_img)
 
+        self.set_texture(self.struct_level)
 
     def develop(self):        
         self.struct_level += 1
-        if self.struct_level > len(self.tile_def["structs"])-1:
+        if self.struct_level > len(self.tile_def["struct"])-1:
             print("No structure found for this tile.")
             self.struct_level -= 1
             return None
