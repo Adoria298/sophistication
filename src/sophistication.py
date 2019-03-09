@@ -130,7 +130,8 @@ class Sophistication(arcade.Window):
             self.player.change_x = MOVEMENT_SPEED
         elif key == arcade.key.ENTER:
             closest_tile = arcade.get_closest_sprite(self.player, self.tile_list)[0] # second element is its distance to the player
-            closest_tile.develop()
+            closest_tile.develop(self.score)
+            self.score += closest_tile.score_mod
         
         #TODO(adoria298): add save logic
 
