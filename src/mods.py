@@ -30,14 +30,11 @@ def load_mod(folder_path):
     # TODO(adoria298): Put this bit into some functions
     # creates full path to each tile image
     for tile_sym in mod_tile_defs:
-        mod_tile_defs[tile_sym]["img"] = folder_path + "/" + mod_tile_defs[tile_sym]["img"]
-
-    for tile_sym in mod_tile_defs:
         tile_def = mod_tile_defs[tile_sym]
         if tile_def.get("structs", False):
             for struct in tile_def["structs"]:
                 if struct != None:
-                    struct["img"] = f"{folder_path}/{struct['img']}" 
+                    struct["img"] = os.abspath(f"{folder_path}/{struct['img']}")
     tile_defs.update(mod_tile_defs)
     
     

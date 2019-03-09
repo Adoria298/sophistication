@@ -16,50 +16,31 @@ class Tile(arcade.Sprite):
             - symbol - for looking up in mod definitions
             - scaling - the scale the tile should be rendered at
         """
+        super().__init__(scale=TILE_SCALING)
+
         self.symbol = symbol
-        self.tile_def = tile_defs.get(self.symbol, tile_defs.get("U"))
-        super().__init__(self.tile_def.get("img", "unknown.png"),
-                            TILE_SCALING)
+        self.tile_def = tile_defs[symbol]
+        self.struct_def = self.tile_def["struct"]
+        self.struct_level = 0 # texture level as well
 
-        # all code past this point is about structures.
-        # TODO(adoria298): make structures work as outlined!
-        self.struct_level = 0
-
-        self.struct = arcade.Sprite()
-        self.struct.center_x = self.center_x
-        self.struct.center_y = self.center_y
-        self.struct.scale = TILE_SCALING
-        self.struct.draw()
+        for struct in self.struct_def:
+            struct_img = arcade.draw_commands.load_texture(struct["img"])
+            self.append_texture(struct_img)
 
 
-    def develop(self):
-        if self.tile_def.get("structs", False):
-            print("Developing structure.")
-        else:
-            print("No structure found for this tile.")
-            return None
-        
+    def develop(self):        
         self.struct_level += 1
         if self.struct_level > len(self.tile_def["structs"])-1:
+            print("No structure found for this tile.")
             self.struct_level -= 1
             return None
+        else:
+            print("Developing structure.")
 
-        self.struct_def = self.tile_def["structs"][self.struct_level]
-        self.struct_img = self.struct_def.get("img", None)
-        if self.struct_img == None:
-            return None
+        self.set_texture(self.struct_level)
+
         
-        self.struct = arcade.Sprite(self.struct_img, TILE_SCALING)
-
-    def update(self):
-        super().update()
-        if self.struct:
-            self.struct.update()
-
-    def draw(self):
-        super().draw()
-        if self.struct:
-            self.struct.draw()
+        
 
 if __name__ == "__main__":
     tile = Tile("U", 0.5)
