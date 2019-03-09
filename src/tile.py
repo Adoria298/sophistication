@@ -24,7 +24,13 @@ class Tile(arcade.Sprite):
         # all code past this point is about structures.
         # TODO(adoria298): make structures work as outlined!
         self.struct_level = 0
-        self.struct = False
+
+        self.struct = arcade.Sprite()
+        self.struct.center_x = self.center_x
+        self.struct.center_y = self.center_y
+        self.struct.scale = TILE_SCALING
+        self.struct.draw()
+
 
     def develop(self):
         if self.tile_def.get("structs", False):
@@ -44,11 +50,9 @@ class Tile(arcade.Sprite):
             return None
         
         self.struct = arcade.Sprite(self.struct_img, TILE_SCALING)
-        self.struct.center_x = self.center_x
-        self.struct.center_y = self.center_y
-        self.struct.draw()
 
     def update(self):
+        super().update()
         if self.struct:
             self.struct.update()
 
