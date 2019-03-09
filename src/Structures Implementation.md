@@ -44,4 +44,4 @@ This creates a structure with 2 levels, each with their own image (the first lev
 
 ## Internal Code Representation
 
-Structures are core information about the tile. They are what the tile looks like. They are effectively levels for tiles. As such, they should be stored in the tile class, and graphically represented as textures of the tile.
+Structures are core information about the tile. They are what the tile looks like. They are effectively levels for tiles. As such, they should be stored in the tile class, and graphically represented as textures of the tile. Values undefined in mod.json are to be assumed as 0.

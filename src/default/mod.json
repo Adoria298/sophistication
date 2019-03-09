@@ -7,10 +7,7 @@
 		"P": {
 			"struct": [
 				{
-					"img": "images/plains/plains.png",    
-					"imm_score": 0,         
-					"over_time_score": 0,   
-					"decrease": 0           
+					"img": "images/plains/plains.png"          
 				},
 				{
 					"img": "images/plains/village.png",
