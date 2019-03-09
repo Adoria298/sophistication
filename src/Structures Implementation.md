@@ -6,16 +6,23 @@ A structure is visual graphic that can be placed upon a tile, which improves the
 
 A player can develop a structure by pressing enter upon the structure. This may change the structure's graphic, but will grant the player an immediate score increase, and an over time score increase, which will act the same as before the development. A structure will not disappear if the over time score is less then zero, but instead will regress a level, until the structure disappears. As before, the over time score will still affect the player, and will continue to decrease.
 
+Some structures may require a minimum score before they can be developed.
+
 ## Representation by Mods
 
-A structure should be represented as an array named `struct` in a tile definition. Each element of the array will be a level of structure. Every tile starts out with no structure, and returns to no structure. Element 0 of the `struct` array is `null` because the beginning of a structure is nothing.
+A structure should be represented as an array named `struct` in a tile definition. Each element of the array will be a level of structure. Every tile starts out with no structure, and returns to no structure.
 
 Example:
 
 ```json
 "P": {
-    "structs": [
-        null,
+    "struct": [
+        {
+            "img": "plains.png",    // image representing the structure
+            "imm_score": 0,         // the score the structure adds to the game when first created
+            "over_time_score": 0,   // the starting value for how much the score changes each loop
+            "decrease": 0           // how much this score ^ decreases
+        },
         {
             "img": "struct1.png",
             "imm_score": 100,
@@ -26,14 +33,15 @@ Example:
             "img": "struct2.png",
             "imm_score": 200,
             "over_time_score": 198,
-            "decrease": 2
+            "decrease": 2,
+            "min_score": 150        // the minimum score required for this structure to be built.
         }
     ]
 }
 ```
 
-This creates a structure with 2 levels, each with their own overlay image. The immediate score added of level 1 is 100, which decreases to 99 on the next turn, then 98, 97, 96, etc. The second level grants 200 points, which decreases by 2 each go from the `over_time_score`, which starts at 198.
+This creates a structure with 2 levels, each with their own image (the first level is the default). The immediate score added of level 1 is 100, which decreases to 99 on the next turn, then 98, 97, 96, etc. The second level grants 200 points, which decreases by 2 each go from the `over_time_score`, which starts at 198. The second level requires a score of at least 150 points to be developed.
 
 ## Internal Code Representation
 
-Structures should be stored in a Tile class, as part of the information about the Tile.
+Structures are core information about the tile. They are what the tile looks like. They are effectively levels for tiles. As such, they should be stored in the tile class, and graphically represented as textures of the tile.
