@@ -27,14 +27,17 @@ class Tile(arcade.Sprite):
             struct_img = arcade.draw_commands.load_texture(struct["img"])
             self.append_texture(struct_img)
 
-        self._update_struct()
+        self._update_struct(apply_imm_score=True)
 
-    def develop(self, curr_score):        
+    def develop(self, curr_score):
+        # updates the current level of structure        
         self.struct_level += 1
+        # checks if that level of structure is possible
         if self.struct_level > len(self.tile_def["struct"])-1:
             print("No structure found for this tile.")
             self.struct_level -= 1
             return False
+        # checks if the minimum score is less than the current score
         else:
             if curr_score >= self.struct_def[self.struct_level].get("min_score", 0):
                 print("Developing structure.")
@@ -43,12 +46,21 @@ class Tile(arcade.Sprite):
                 return False
 
         # if all the tests are passed, develop the structure
-        self._update_struct()
+        self._update_struct(apply_imm_score=True)
         return True
 
-    def _update_struct(self):
+    def _update_struct(self, apply_imm_score):
         self.set_texture(self.struct_level)
-        self.score_mod = self.struct_def[self.struct_level].get("imm_score", 0)
+        if apply_imm_score:
+            self.score_mod = self.struct_def[self.struct_level].get("imm_score", 0)
+        
+    def get_score_modifier(self):
+        if self.struct_def[self.struct_level].get("over_time_score", False):
+            self.score_mod = self.struct_def[self.struct_level]["over_time_score"]
+            self.struct_def[self.struct_level]["over_time_score"] -= self.struct_def[self.struct_level].get("decrease", 0)
+        if self.score_mod > 0:
+            print(self.score_mod)
+        return self.score_mod
         
         
 

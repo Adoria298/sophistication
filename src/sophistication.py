@@ -67,9 +67,11 @@ class Sophistication(arcade.Window):
                 self.tile_list.append(tile)
                 
     def gen_score(self):
-        # time based scoring
+        # scores only updated every now and then.
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
-            self.score += int(sum(self.delta_times) / 7)
+            #self.score += int(sum(self.delta_times) / 7)
+            for tile in self.tile_list:
+                self.score += tile.get_score_modifier()
         
 
     def on_draw(self):
