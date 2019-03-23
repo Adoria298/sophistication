@@ -30,6 +30,9 @@ class Tile(arcade.Sprite):
         self._update_struct(apply_imm_score=True)
 
     def develop(self, curr_score):
+        """
+        Develops this tile's structure. The current score is required to check if the tile has the minimum amount of score.
+        """
         # updates the current level of structure        
         self.struct_level += 1
         # checks if that level of structure is possible
@@ -50,11 +53,18 @@ class Tile(arcade.Sprite):
         return True
 
     def _update_struct(self, apply_imm_score):
+        """
+        Changes this tile's texture to the struct_level of textures. 
+        If apply_imm_score is truey, sets self.score_mod to to the structure's imm_score (default 0).
+        """
         self.set_texture(self.struct_level)
         if apply_imm_score:
             self.score_mod = self.struct_def[self.struct_level].get("imm_score", 0)
         
     def get_score_modifier(self):
+        """
+        Returns the over time score for this tile, and decreases it for next time.
+        """
         if self.struct_def[self.struct_level].get("over_time_score", False):
             self.score_mod = self.struct_def[self.struct_level]["over_time_score"]
             self.struct_def[self.struct_level]["over_time_score"] -= self.struct_def[self.struct_level].get("decrease", 0)
@@ -65,4 +75,4 @@ class Tile(arcade.Sprite):
         
 
 if __name__ == "__main__":
-    tile = Tile("U", 0.5)
+    tile = Tile("U")
