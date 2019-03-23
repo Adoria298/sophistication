@@ -52,6 +52,10 @@ class Tile(arcade.Sprite):
         self._update_struct(apply_imm_score=True)
         return True
 
+    # TODO(adoria298): structure regression
+    # TODO(adoria298): multiple default structures - ports etc
+    # TODO(adoria298): decrease default structures' score mods?
+
     def _update_struct(self, apply_imm_score):
         """
         Changes this tile's texture to the struct_level of textures. 
