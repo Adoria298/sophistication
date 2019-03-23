@@ -42,6 +42,7 @@ class Tile(arcade.Sprite):
                 print("Score must be higher to develop this tile.")
                 return False
 
+        # if all the tests are passed, develop the structure
         self._update_struct()
         return True
 
