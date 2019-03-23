@@ -34,15 +34,16 @@ class Tile(arcade.Sprite):
         if self.struct_level > len(self.tile_def["struct"])-1:
             print("No structure found for this tile.")
             self.struct_level -= 1
-            return None
+            return False
         else:
             if curr_score >= self.struct_def[self.struct_level].get("min_score", 0):
                 print("Developing structure.")
             else:
                 print("Score must be higher to develop this tile.")
-                return None
+                return False
 
         self._update_struct()
+        return True
 
     def _update_struct(self):
         self.set_texture(self.struct_level)
