@@ -4,7 +4,7 @@
 
 A structure is a visual graphic that can be placed upon a tile, and which improves the score of the player. A structure is placed when a player navigates to a tile and presses enter. Different tiles have a different structure that will be placed upon enter. A structure will grant the player an immediate score, and an over time score, which will decrease unless the player develops the structure. If the score added is less than zero, the structure will be removed from the player's view, but will still affect the player's score.
 
-A player can develop a structure by pressing enter upon the structure. This may change the structure's graphic, but will grant the player an immediate score increase, and an over time score increase, which will act the same as before the development. A structure will not disappear if the over time score is less then zero, but instead will regress a level, until the structure disappears. As before, the over time score will still affect the player, and will continue to decrease.
+A player can develop a structure by pressing enter upon the structure. This may change the structure's graphic, but will grant the player an immediate score increase, and an over time score increase, which will act the same as before the development. A structure will not disappear if the over time score is less then zero, but instead will regress a level, until the structure disappears. As before, the over time score will still affect the player, and will continue to decrease. A regression decreases the player's score by half of the structure's immediate score.
 
 Some structures may require a minimum score before they can be developed.
 
