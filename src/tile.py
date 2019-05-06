@@ -53,17 +53,31 @@ class Tile(arcade.Sprite):
         return True
 
     # TODO(adoria298): structure regression
-    # TODO(adoria298): multiple default structures - ports etc
+    def regress(self):
+        """ 
+        Checks if this structure can be regressed. 
+        If so, regresses it.
+        """
+        if self.struct_level <= 0:
+            return None # can't be regressed further
+        elif self.score_mod < 0:
+            self.struct_level -= 1
+            self._update_struct(apply_imm_score=False, negate_imm_score=True)
+    # TODO(adoria298): multiple default structures - ports etc - trade?
     # TODO(adoria298): decrease default structures' score mods?
 
-    def _update_struct(self, apply_imm_score):
+    def _update_struct(self, apply_imm_score, negate_imm_score=False):
         """
         Changes this tile's texture to the struct_level of textures. 
-        If apply_imm_score is truey, sets self.score_mod to to the structure's imm_score (default 0).
+        If apply_imm_score is truey, sets self.score_mod to the structure's imm_score (default 0).
+        If negate_imm_score is truey, sets self.score_mod to -1/2 of the structure's immediate score. This doesn't happen if apply_imm_score is truey.
         """
         self.set_texture(self.struct_level)
+        imm_score = self.struct_def[self.struct_level].get("imm_score", 0)
         if apply_imm_score:
-            self.score_mod = self.struct_def[self.struct_level].get("imm_score", 0)
+            self.score_mod = imm_score
+        elif negate_imm_score:
+            self.score_mod = -1/2 * imm_score
         
     def get_score_modifier(self):
         """
