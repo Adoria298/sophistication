@@ -86,8 +86,6 @@ class Tile(arcade.Sprite):
         if self.struct_def[self.struct_level].get("over_time_score", False):
             self.score_mod = self.struct_def[self.struct_level]["over_time_score"]
             self.struct_def[self.struct_level]["over_time_score"] -= self.struct_def[self.struct_level].get("decrease", 0)
-        if self.score_mod > 0:
-            print(self.score_mod)
         return self.score_mod
         
         
