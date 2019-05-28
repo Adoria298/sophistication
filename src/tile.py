@@ -60,7 +60,7 @@ class Tile(arcade.Sprite):
         """
         if self.struct_level <= 0:
             return None # can't be regressed further
-        elif self.score_mod < 0:
+        elif self.time < 0:
             self.struct_level -= 1
             self._update_struct(apply_imm_score=False, negate_imm_score=True)
     # TODO(adoria298): multiple default structures - ports etc - trade?
@@ -78,12 +78,26 @@ class Tile(arcade.Sprite):
             self.score_mod = imm_score
         elif negate_imm_score:
             self.score_mod = -1/2 * imm_score
+        self.time = self.struct_def[self.struct_level].get("time", 0)
         
     def get_time(self):
         """
-        Returns the over time score for this tile, and decreases it for next time.
+        Updates and returns the countdown.
         """
-        
+        curr_struct = self.struct_def[self.struct_level]
+        self.time -= curr_struct.get("decrease", 0)
+        print(self.time)
+        return self.time
+
+    def update(self):
+        super().update()
+
+        if self.score_mod != 0:
+            self.score_mod = 0
+
+        self.get_time()
+        self.regress() # if necessary
+
         
         
 

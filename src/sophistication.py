@@ -62,7 +62,7 @@ class Sophistication(arcade.Window):
             for symbol_index, symbol in enumerate(row):
                 tile = Tile(symbol, self.tile_defs)               
                 tile.right = (1 + symbol_index) * 64
-                tile.top = (8 - row_index) * 64
+                tile.top = (8 - row_index) * 64 
                 
                 self.tile_list.append(tile)
                 
@@ -71,7 +71,7 @@ class Sophistication(arcade.Window):
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
             #self.score += int(sum(self.delta_times) / 7)
             for tile in self.tile_list:
-                self.score += tile.get_score_modifier()
+                self.score += tile.score_mod
         
 
     def on_draw(self):
