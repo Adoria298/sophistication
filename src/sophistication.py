@@ -86,7 +86,7 @@ class Sophistication(arcade.Window):
 
 
         # display score
-        score_text = f"Score: {self.score}"
+        score_text = f"Score: {int(self.score)}" # remove decimal place from score.
         arcade.draw_text(score_text, 400, 480, arcade.color.BLACK, 14)
 
         # game over mechanics
