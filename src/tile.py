@@ -14,12 +14,12 @@ class Tile(arcade.Sprite):
 
         Params: 
             - symbol - for looking up in mod definitions
-            - scaling - the scale the tile should be rendered at
+            - tile_defs - where to find information about this tile.
         """
         super().__init__(scale=TILE_SCALING)
 
         self.symbol = symbol
-        self.tile_def = tile_defs[symbol]
+        self.tile_def = tile_defs[symbol].copy()
         self.struct_def = self.tile_def["struct"]
         self.struct_level = 0 # texture level as well
 
@@ -79,14 +79,11 @@ class Tile(arcade.Sprite):
         elif negate_imm_score:
             self.score_mod = -1/2 * imm_score
         
-    def get_score_modifier(self):
+    def get_time(self):
         """
         Returns the over time score for this tile, and decreases it for next time.
         """
-        if self.struct_def[self.struct_level].get("over_time_score", False):
-            self.score_mod = self.struct_def[self.struct_level]["over_time_score"]
-            self.struct_def[self.struct_level]["over_time_score"] -= self.struct_def[self.struct_level].get("decrease", 0)
-        return self.score_mod
+        
         
         
 

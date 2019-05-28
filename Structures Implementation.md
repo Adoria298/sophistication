@@ -2,9 +2,9 @@
 
 ## Description
 
-A structure is a visual graphic that can be placed upon a tile, and which improves the score of the player. A structure is placed when a player navigates to a tile and presses enter. Different tiles have a different structure that will be placed upon enter. A structure will grant the player an immediate score, and an over time score, which will decrease unless the player develops the structure. If the score added is less than zero, the structure will be removed from the player's view, but will still affect the player's score.
+A structure is a visual graphic that can be placed upon a tile, and which improves the score of the player. A structure is placed when a player navigates to a tile and presses enter. Different tiles have a different structure that will be placed upon enter. A structure will grant the player an immediate score, and a countdown will begin. When the countdown is less than zero, the structure will be removed from the player's view, but will still affect the player's score.
 
-A player can develop a structure by pressing enter upon the structure. This may change the structure's graphic, but will grant the player an immediate score increase, and an over time score increase, which will act the same as before the development. A structure will not disappear if the over time score is less then zero, but instead will regress a level, until the structure disappears. As before, the over time score will still affect the player, and will continue to decrease. A regression decreases the player's score by half of the structure's immediate score.
+A player can develop a structure by pressing enter upon the structure. This may change the structure's graphic, but will grant the player an immediate score increas. A structure will not disappear if its time is less then zero, but instead will regress a level, until the structure disappears. A regression decreases the player's score by half of the structure's immediate score.
 
 Some structures may require a minimum score before they can be developed.
 
@@ -20,19 +20,19 @@ Example:
         {
             "img": "plains.png",    // image representing the structure
             "imm_score": 0,         // the score the structure adds to the game when first created
-            "over_time_score": 0,   // the starting value for how much the score changes each loop
-            "decrease": 0           // how much this score ^ decreases
+            "time": 0,              // the starting value for how long until the structure regresses (countdown)
+            "decrease": 0           // how much this value ^ decreases each loop
         },
         {
             "img": "struct1.png",
             "imm_score": 100,
-            "over_time_score": 99,
+            "time": 99,
             "decrease": 1
         },
         {
             "img": "struct2.png",
             "imm_score": 200,
-            "over_time_score": 198,
+            "time": 198,
             "decrease": 2,
             "min_score": 150        // the minimum score required for this structure to be built.
         }
@@ -40,7 +40,7 @@ Example:
 }
 ```
 
-This creates a structure with 2 levels, each with their own image (the first level is the default). The immediate score added of level 1 is 100, which decreases to 99 on the next turn, then 98, 97, 96, etc. The second level grants 200 points, which decreases by 2 each go from the `over_time_score`, which starts at 198. The second level requires a score of at least 150 points to be developed.
+This creates a structure with 2 levels, each with their own image (the first level is the default). The immediate score added of level 1 is 100, and this structure will countdown from 99 before it disappears. The third level grants 200 points and counts down from 198. The third level requires a score of at least 150 points to be developed.
 
 ## Internal Code Representation
 
