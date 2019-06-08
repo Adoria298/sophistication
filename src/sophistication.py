@@ -148,7 +148,7 @@ class Sophistication(arcade.Window):
             arcade.set_viewport(self.view_left,
                                 SCREEN_WIDTH + self.view_left,
                                 self.view_bottom,
-                                SCREEN_HEIGHT + self.view_right)
+                                SCREEN_HEIGHT + self.view_bottom)
 
         self.on_draw()
 
