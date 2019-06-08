@@ -53,6 +53,10 @@ class Sophistication(arcade.Window):
         # initialises the player
         self.player = Player(PLAYER_SCALING)
 
+        #for scrolling
+        self.view_bottom = 0
+        self.view_left = 0
+
     def prepare_tile_list(self):
         """
         Adds every tile to self.tile_list as a Tile instance.
@@ -116,6 +120,36 @@ class Sophistication(arcade.Window):
         self.player.update()
         self.tile_list.update()
 
+        # scrolling
+
+        changed = False
+
+        left_bndry = self.view_left + VIEWPORT_MARGIN
+        if self.player.left < left_bndry:
+            self.view_left = -= left_bndry - self.player.left
+            changed = True
+
+        right_bndry = self.view_left + SCREEN_WIDTH - VIEWPORT_MARGIN
+        if self.player.right > right_bndry:
+            self.view_left += self.player.right - right_bndry
+            changed = True
+
+        top_bndry = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
+        if self.player.top > top_bndry:
+            self.view_bottom += self.player.top + top_bndry
+            changed = True
+
+        bottom_bndry = self.view_bottom + VIEWPORT_MARGIN
+        if self.player.top < bottom_bndry:
+            self.view_left = -= bottom_bndry - self.player.bottom
+            changed = True
+        
+        if changed:
+            arcade.set_viewport(self.view_left,
+                                SCREEN_WIDTH + self.view_left,
+                                self.view_bottom,
+                                SCREEN_HEIGHT + self.view_right)
+
         self.on_draw()
 
     def on_key_press(self, key, modifiers):
@@ -141,5 +175,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map.csv", "csv", "./default")
+    game = Sophistication("map12.csv", "csv", "./default")
     arcade.run()
