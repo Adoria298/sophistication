@@ -126,7 +126,7 @@ class Sophistication(arcade.Window):
 
         left_bndry = self.view_left + VIEWPORT_MARGIN
         if self.player.left < left_bndry:
-            self.view_left = -= left_bndry - self.player.left
+            self.view_left -= left_bndry - self.player.left
             changed = True
 
         right_bndry = self.view_left + SCREEN_WIDTH - VIEWPORT_MARGIN
@@ -141,7 +141,7 @@ class Sophistication(arcade.Window):
 
         bottom_bndry = self.view_bottom + VIEWPORT_MARGIN
         if self.player.top < bottom_bndry:
-            self.view_left = -= bottom_bndry - self.player.bottom
+            self.view_left -= bottom_bndry - self.player.bottom
             changed = True
         
         if changed:
