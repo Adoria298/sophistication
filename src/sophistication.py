@@ -69,9 +69,11 @@ class Sophistication(arcade.Window):
     def gen_score(self):
         # scores only updated every now and then.
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
-            #self.score += int(sum(self.delta_times) / 7)
             for tile in self.tile_list:
-                self.score += tile.score_mod
+                if tile.mode == "regressed":
+                    self.score += tile.score_mod  
+                    # only update the score if the tile has just regressed, 
+                    # because the score updates itself upon development.
         
 
     def on_draw(self):

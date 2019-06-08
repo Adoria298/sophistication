@@ -23,6 +23,8 @@ class Tile(arcade.Sprite):
         self.struct_def = self.tile_def["struct"]
         self.struct_level = 0 # texture level as well
 
+        self.mode = "stasis"
+
         for struct in self.struct_def:
             struct_img = arcade.draw_commands.load_texture(struct["img"])
             self.append_texture(struct_img)
@@ -67,6 +69,7 @@ class Tile(arcade.Sprite):
             self._update_struct(imm_score, 
                                 apply_imm_score=False, 
                                 negate_imm_score=True)
+            self.mode = "regressed"
     # TODO(adoria298): multiple default structures - ports etc - trade?
     # TODO(adoria298): decrease default structures' score mods?
 
@@ -97,7 +100,7 @@ class Tile(arcade.Sprite):
 
         if self.score_mod != 0:
             self.score_mod = 0
-
+        self.mode = "stasis"
         self.get_time()
         self.regress() # if necessary
 
