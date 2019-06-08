@@ -27,7 +27,8 @@ class Tile(arcade.Sprite):
             struct_img = arcade.draw_commands.load_texture(struct["img"])
             self.append_texture(struct_img)
 
-        self._update_struct(apply_imm_score=True)
+        self._update_struct(
+            self.struct_def[self.struct_level].get("imm_score", 0), apply_imm_score=True)
 
     def develop(self, curr_score):
         """
@@ -49,7 +50,7 @@ class Tile(arcade.Sprite):
                 return False
 
         # if all the tests are passed, develop the structure
-        self._update_struct(apply_imm_score=True)
+        self._update_struct(self.struct_def[self.struct_level].get("imm_score", 0), apply_imm_score=True)
         return True
 
     # TODO(adoria298): structure regression
@@ -62,18 +63,20 @@ class Tile(arcade.Sprite):
             return None # can't be regressed further
         elif self.time < 0:
             self.struct_level -= 1
-            self._update_struct(apply_imm_score=False, negate_imm_score=True)
+            imm_score = self.struct_def[self.struct_level+1].get("imm_score", 0)
+            self._update_struct(imm_score, 
+                                apply_imm_score=False, 
+                                negate_imm_score=True)
     # TODO(adoria298): multiple default structures - ports etc - trade?
     # TODO(adoria298): decrease default structures' score mods?
 
-    def _update_struct(self, apply_imm_score, negate_imm_score=False):
+    def _update_struct(self, imm_score, apply_imm_score, negate_imm_score=False):
         """
         Changes this tile's texture to the struct_level of textures. 
         If apply_imm_score is truey, sets self.score_mod to the structure's imm_score (default 0).
         If negate_imm_score is truey, sets self.score_mod to -1/2 of the structure's immediate score. This doesn't happen if apply_imm_score is truey.
         """
         self.set_texture(self.struct_level)
-        imm_score = self.struct_def[self.struct_level].get("imm_score", 0)
         if apply_imm_score:
             self.score_mod = imm_score
         elif negate_imm_score:
