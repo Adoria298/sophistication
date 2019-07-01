@@ -126,26 +126,30 @@ class Sophistication(arcade.Window):
 
         changed = False
 
+        # Scroll left
         left_bndry = self.view_left + VIEWPORT_MARGIN
         if self.player.left < left_bndry:
             self.view_left -= left_bndry - self.player.left
             changed = True
 
+        # Scroll right
         right_bndry = self.view_left + SCREEN_WIDTH - VIEWPORT_MARGIN
         if self.player.right > right_bndry:
             self.view_left += self.player.right - right_bndry
             changed = True
 
+        # Scroll up
         top_bndry = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
         if self.player.top > top_bndry:
-            self.view_bottom += self.player.top + top_bndry
+            self.view_bottom += self.player.top - top_bndry
             changed = True
 
+        # Scroll down
         bottom_bndry = self.view_bottom + VIEWPORT_MARGIN
-        if self.player.top < bottom_bndry:
-            self.view_left -= bottom_bndry - self.player.bottom
+        if self.player.bottom < bottom_bndry:
+            self.view_bottom -= bottom_bndry - self.player.bottom
             changed = True
-        
+
         if changed:
             arcade.set_viewport(self.view_left,
                                 SCREEN_WIDTH + self.view_left,
