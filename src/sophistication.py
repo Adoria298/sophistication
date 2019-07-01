@@ -95,7 +95,7 @@ class Sophistication(arcade.Window):
 
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
-        arcade.draw_text(score_text, 400, 480, arcade.color.BLACK, 14)
+        arcade.draw_text(score_text, self.view_left+400, self.view_bottom+480, arcade.color.BLACK, 14) # addition in position keeps the score stable, stops it drifting
 
         # game over mechanics
         if self.game_over:
