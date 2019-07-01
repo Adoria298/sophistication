@@ -28,6 +28,8 @@ class Sophistication(arcade.Window):
         """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
 
+        arcade.set_background_color(arcade.color.BANANA_MANIA) # when the map runs out
+
         # mod loading
         for mod in mods_to_load:
             mods.load_mod(mod)

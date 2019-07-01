@@ -43,7 +43,7 @@ class Player(arcade.Sprite):
                 self.bottom = 0
             if self.top > SCREEN_HEIGHT - 1:
                 self.top = SCREEN_HEIGHT - 1
-            
+       
         self.change_x = 0
         self.change_y = 0
 
