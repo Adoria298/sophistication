@@ -117,7 +117,7 @@ class Sophistication(arcade.Window):
         #TODO(adoria298): add structure scoring
         #TODO(adoria298): add decay logic
 
-        self.player.update()
+        self.player.update(self.map)
         self.tile_list.update()
 
         # scrolling
