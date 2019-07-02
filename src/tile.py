@@ -55,7 +55,6 @@ class Tile(arcade.Sprite):
         self._update_struct(self.struct_def[self.struct_level].get("imm_score", 0), apply_imm_score=True)
         return True
 
-    # TODO(adoria298): structure regression
     def regress(self):
         """ 
         Checks if this structure can be regressed. 
@@ -70,8 +69,7 @@ class Tile(arcade.Sprite):
                                 apply_imm_score=False, 
                                 negate_imm_score=True)
             self.mode = "regressed"
-    # TODO(adoria298): multiple default structures - ports etc - trade?
-    # TODO(adoria298): decrease default structures' score mods?
+    # TODO(adoria298): multiple default structures - ports etc - trade
 
     def _update_struct(self, imm_score, apply_imm_score, negate_imm_score=False):
         """

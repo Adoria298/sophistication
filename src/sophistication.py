@@ -116,9 +116,6 @@ class Sophistication(arcade.Window):
         if self.score < 0:
             self.game_over = True
 
-        #TODO(adoria298): add structure scoring
-        #TODO(adoria298): add decay logic
-
         self.player.update(self.map)
         self.tile_list.update()
 
