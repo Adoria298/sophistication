@@ -120,6 +120,7 @@ class Sophistication(arcade.Window):
         self.tile_list.update()
 
         # scrolling
+        #TODO(adoria298): Allow the 16th column to be seen.
 
         changed = False
 
