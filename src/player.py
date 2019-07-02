@@ -36,15 +36,16 @@ class Player(arcade.Sprite):
             if self.left < 0:
                 self.left = 0
             if self.right > SCREEN_WIDTH - 1:
-                self.right = SCREEN_WIDTH - 1
+                self.right = SCREEN_WIDTH
             
             # prevents y-axis bouncing
-            """
+            # removed to allow movement/prevent blackouts
+            """ 
             if self.bottom < 0:
                 self.bottom = 0
             """
             if self.top > SCREEN_HEIGHT - 1:
-                self.top = SCREEN_HEIGHT - 1
+                self.top = SCREEN_HEIGHT
        
         self.change_x = 0
         self.change_y = 0
