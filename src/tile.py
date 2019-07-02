@@ -92,7 +92,6 @@ class Tile(arcade.Sprite):
         """
         curr_struct = self.struct_def[self.struct_level]
         self.time -= curr_struct.get("decrease", 0)
-        print(self.time)
         return self.time
 
     def update(self):

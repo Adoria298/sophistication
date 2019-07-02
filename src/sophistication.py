@@ -28,6 +28,8 @@ class Sophistication(arcade.Window):
         """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
 
+        arcade.set_background_color(arcade.color.BANANA_MANIA) # when the map runs out
+
         # mod loading
         for mod in mods_to_load:
             mods.load_mod(mod)
@@ -52,6 +54,10 @@ class Sophistication(arcade.Window):
 
         # initialises the player
         self.player = Player(PLAYER_SCALING)
+
+        #for scrolling
+        self.view_bottom = 0
+        self.view_left = 0
 
     def prepare_tile_list(self):
         """
@@ -89,7 +95,7 @@ class Sophistication(arcade.Window):
 
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
-        arcade.draw_text(score_text, 400, 480, arcade.color.BLACK, 14)
+        arcade.draw_text(score_text, self.view_left+400, self.view_bottom+480, arcade.color.BLACK, 14) # addition in position keeps the score stable, stops it drifting
 
         # game over mechanics
         if self.game_over:
@@ -113,8 +119,42 @@ class Sophistication(arcade.Window):
         #TODO(adoria298): add structure scoring
         #TODO(adoria298): add decay logic
 
-        self.player.update()
+        self.player.update(self.map)
         self.tile_list.update()
+
+        # scrolling
+
+        changed = False
+
+        # Scroll left
+        left_bndry = self.view_left + VIEWPORT_MARGIN
+        if self.player.left < left_bndry:
+            self.view_left -= left_bndry - self.player.left
+            changed = True
+
+        # Scroll right
+        right_bndry = self.view_left + SCREEN_WIDTH - VIEWPORT_MARGIN
+        if self.player.right > right_bndry:
+            self.view_left += self.player.right - right_bndry
+            changed = True
+
+        # Scroll up
+        top_bndry = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
+        if self.player.top > top_bndry:
+            self.view_bottom += self.player.top - top_bndry
+            changed = True
+
+        # Scroll down
+        bottom_bndry = self.view_bottom + VIEWPORT_MARGIN
+        if self.player.bottom < bottom_bndry:
+            self.view_bottom -= bottom_bndry - self.player.bottom
+            changed = True
+
+        if changed:
+            arcade.set_viewport(self.view_left,
+                                SCREEN_WIDTH + self.view_left,
+                                self.view_bottom,
+                                SCREEN_HEIGHT + self.view_bottom)
 
         self.on_draw()
 
@@ -141,5 +181,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map.csv", "csv", "./default")
+    game = Sophistication("map12.csv", "csv", "./default")
     arcade.run()
