@@ -12,7 +12,7 @@ Some structures may require a minimum score before they can be developed.
 
 A structure should be represented as an array named `struct` in a tile definition. Each element of the array will be a level of structure. Every tile starts out with no structure, and returns to no structure.
 
-Example:
+### Example
 
 ```json
 "P": {

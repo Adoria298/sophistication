@@ -121,6 +121,7 @@ class Sophistication(arcade.Window):
 
         # scrolling
         #TODO(adoria298): Allow the 16th column to be seen.
+        #TODO(adoria298): stop bounce back on the far right
 
         changed = False
 
