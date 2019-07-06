@@ -16,11 +16,21 @@
 					"decrease": 1
 				},
 				{
-					"img": "images/plains/ hstructures/town.png",
+					"img": "images/plains/structures/town.png",
 					"imm_score": 200,
 					"time": 198,
 					"decrease": 2,
 					"min_score": 150        
+				}
+			],
+			"traders": [
+				{
+					"img": "image/plains/traders/nomad.png",
+					"speed": 8
+				},
+				{
+					"img": "image/plains/traders/merchants.png",
+					"speed": 16
 				}
 			]
 		},
