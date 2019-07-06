@@ -2,6 +2,7 @@
 import json
 import csv 
 import os
+import random
 
 # external libraries
 import arcade
@@ -59,6 +60,25 @@ class Sophistication(arcade.Window):
         self.view_bottom = 0
         self.view_left = 0
 
+        # for trade
+        self.trade_graph = self.gen_trade_graph()
+
+    def gen_trade_graph(self):
+        """
+        Populates self.trade_graph with lists of coords attached to other coords.
+        Randomised.
+
+        Assumes the map is a square
+        """
+        max_coord = len(self.map) * 64 -1
+        graph = {}
+        for tile in self.tile_list
+            routes = []
+            for j in range random.randint(0, 10): # chance of no connections
+                routes.append((random.randint(0, max_coord), random.randint(0, max_coord)))
+            graph[(tile.center_x, tile.center_y)] = routes
+        return graph
+        
     def prepare_tile_list(self):
         """
         Adds every tile to self.tile_list as a Tile instance.
