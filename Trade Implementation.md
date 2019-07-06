@@ -20,7 +20,7 @@ Much like structures, trade networks are represented under the `trade` object in
                 "speed": 8 // speed the trader moves at
             },
             {
-                "img": "merchant.png",
+                "img": "merchants.png",
                 "speed": 16
             },
             {

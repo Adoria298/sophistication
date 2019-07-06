@@ -31,6 +31,10 @@
 				{
 					"img": "image/plains/traders/merchants.png",
 					"speed": 16
+				},
+				{
+					"img": "images/plains/traders/train.png",
+					"speed": 32
 				}
 			]
 		},
