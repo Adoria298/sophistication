@@ -47,9 +47,9 @@
 					"img": "images/sea/structures/port.png",
 					"imm_score": 75,
 					"time": 70,
-					"decrease" 5,
+					"decrease": 5,
 					"min_score": 40
-
+				}
 			]
 		},
 		"D": {
