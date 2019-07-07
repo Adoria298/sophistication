@@ -25,7 +25,7 @@ Much like structures, trade networks are represented under the `trade` object in
             },
             {
                 "img": "train.png",
-                "speed": 32 // player speed
+                "speed": 32 // half player speed
             }
         ],
         "colour": "#F60678" // a nice pinky-purple
