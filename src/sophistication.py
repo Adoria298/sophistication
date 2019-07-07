@@ -62,6 +62,7 @@ class Sophistication(arcade.Window):
 
         # for trade
         self.trade_graph = self.gen_trade_graph()
+        self.traders = arcade.SpriteList()
 
     def gen_trade_graph(self):
         """
@@ -72,13 +73,21 @@ class Sophistication(arcade.Window):
         """
         max_coord = len(self.map) * 64 -1
         graph = {}
-        for tile in self.tile_list
+        for tile in self.tile_list:
             routes = []
-            for j in range random.randint(0, 10): # chance of no connections
+            for j in range(random.randint(0, 10)): # chance of no connections
                 routes.append((random.randint(0, max_coord), random.randint(0, max_coord)))
             graph[(tile.center_x, tile.center_y)] = routes
         return graph
         
+    def gen_trader(self):
+        """
+        Generates a trader, tells it the tile it starts at, where it ends, its speed and its form.
+        Adds it to a list of traders.
+        """
+        #TODO: COMPLETE! (trade in general)
+        #TODO: edit mods.py to allow sprite images to be used
+
     def prepare_tile_list(self):
         """
         Adds every tile to self.tile_list as a Tile instance.
