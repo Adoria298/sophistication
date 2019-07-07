@@ -11,6 +11,7 @@ import arcade
 import mods
 from player import Player 
 from tile import Tile
+from trader import Trader
 from constants import *
 
 # sets the working directory to the same directory as where this code is saved.
@@ -89,6 +90,16 @@ class Sophistication(arcade.Window):
         start = random.choice(self.trade_graph.keys())
         end = random.choice(self.trade_graph[start])
 
+        ps = arcade.Sprite(self) # placeholder sprite
+        ps.center_x, ps.center_y = start
+        closest_tile = arcade.get_closest_sprite(ps, self.tile_list)
+        ps.kill() # not needed anymore
+
+        tdef = self.tile_defs[closest_tile.symbol] # tile def for the closest tile
+        trader_info = tdef[closest_tile.struct_level]
+        trader = Trader(trader_info["img"], start, end, trader_info["speed"])
+        self.traders.append(trader)
+
     def prepare_tile_list(self):
         """
         Adds every tile to self.tile_list as a Tile instance.
@@ -102,7 +113,10 @@ class Sophistication(arcade.Window):
                 
                 self.tile_list.append(tile)
                 
-    def gen_score(self):
+    def gen_slow_events(self):
+        """
+        Generates score and traders.
+        """
         # scores only updated every now and then.
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
             for tile in self.tile_list:
@@ -110,7 +124,9 @@ class Sophistication(arcade.Window):
                     self.score += tile.score_mod  
                     # only update the score if the tile has just regressed, 
                     # because the score updates itself upon development.
-        
+            #also used to generate traders
+            if random.randint(0, 10) > 5:
+                self.gen_trader()
 
     def on_draw(self):
         """
