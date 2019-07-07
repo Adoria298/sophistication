@@ -22,14 +22,14 @@ class Trader(arcade.Sprite):
 
         self.center_x, self.center_y = start
         self.end = end
-        self.speed = end
+        self.speed = speed
     
     def update(self):
         """
         Moves the sprite.
         INCOMPLETE.
         """
-        if self.center_x != end[0] and self.center_y != end[1]:
+        if self.center_x != self.end[0] and self.center_y != self.end[1]:
             self.center_x += self.speed
             self.center_y += self.speed
         else:

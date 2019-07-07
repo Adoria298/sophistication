@@ -76,7 +76,7 @@ class Sophistication(arcade.Window):
         graph = {}
         for tile in self.tile_list:
             routes = []
-            for j in range(random.randint(0, 10)): # chance of no connections
+            for j in range(random.randint(1, 10)): # never empty
                 routes.append((random.randint(0, max_coord), random.randint(0, max_coord)))
             graph[(tile.center_x, tile.center_y)] = routes
         return graph
@@ -87,18 +87,19 @@ class Sophistication(arcade.Window):
         Adds it to a list of traders.
         """
         #TODO: COMPLETE! (trade in general)
-        start = random.choice(self.trade_graph.keys())
+        start = random.choice(list(self.trade_graph.keys()))
         end = random.choice(self.trade_graph[start])
 
-        ps = arcade.Sprite(self) # placeholder sprite
+        ps = arcade.Sprite() # placeholder sprite
         ps.center_x, ps.center_y = start
         closest_tile = arcade.get_closest_sprite(ps, self.tile_list)
         ps.kill() # not needed anymore
 
-        tdef = self.tile_defs[closest_tile.symbol] # tile def for the closest tile
-        trader_info = tdef[closest_tile.struct_level]
-        trader = Trader(trader_info["img"], start, end, trader_info["speed"])
-        self.traders.append(trader)
+        tdef = self.tile_defs[closest_tile[0].symbol] # tile def for the closest tile
+        if "traders" in tdef: # in case traders aren't defined
+            trader_info = tdef["traders"][closest_tile[0].struct_level]
+            trader = Trader(trader_info["img"], start, end, trader_info["speed"])
+            self.traders.append(trader)
 
     def prepare_tile_list(self):
         """
@@ -134,8 +135,9 @@ class Sophistication(arcade.Window):
         """
         arcade.start_render()
 
-        # draw map and player
+        # draw map and player, as well as any traders
         self.tile_list.draw()
+        self.traders.draw
         self.player.draw()
 
 
@@ -164,6 +166,7 @@ class Sophistication(arcade.Window):
 
         self.player.update(self.map)
         self.tile_list.update()
+        self.traders.update()
 
         # scrolling
         #TODO(adoria298): Allow the 16th column to be seen.

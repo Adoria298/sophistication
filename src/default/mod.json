@@ -25,11 +25,11 @@
 			],
 			"traders": [
 				{
-					"img": "image/plains/traders/nomad.png",
+					"img": "images/plains/traders/nomad.png",
 					"speed": 8
 				},
 				{
-					"img": "image/plains/traders/merchants.png",
+					"img": "images/plains/traders/merchants.png",
 					"speed": 16
 				},
 				{
