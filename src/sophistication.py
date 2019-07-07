@@ -155,7 +155,7 @@ class Sophistication(arcade.Window):
         """
         # for time based scoring
         self.delta_times.append(delta_time)
-        self.gen_score()
+        self.gen_slow_events()
         # all after here stay at the end of the function
         
         # if negative score - empire collapse
