@@ -21,7 +21,7 @@ class Trader(arcade.Sprite):
         super().__init__(filename=figure)
 
         self.center_x, self.center_y = start
-        self.terminus = end
+        self.end = end
         self.speed = end
     
     def update(self):
@@ -29,5 +29,8 @@ class Trader(arcade.Sprite):
         Moves the sprite.
         INCOMPLETE.
         """
-        self.center_x += self.speed
-        self.center_y += self.speed
+        if self.center_x != end[0] and self.center_y != end[1]:
+            self.center_x += self.speed
+            self.center_y += self.speed
+        else:
+            self.kill()

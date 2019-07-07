@@ -86,7 +86,8 @@ class Sophistication(arcade.Window):
         Adds it to a list of traders.
         """
         #TODO: COMPLETE! (trade in general)
-        #TODO: edit mods.py to allow sprite images to be used
+        start = random.choice(self.trade_graph.keys())
+        end = random.choice(self.trade_graph[start])
 
     def prepare_tile_list(self):
         """
