@@ -85,6 +85,8 @@ class Sophistication(arcade.Window):
         """
         Generates a trader, tells it the tile it starts at, where it ends, its speed and its form.
         Adds it to a list of traders.
+
+        Returns True if trader successfully generated
         """
         #TODO: COMPLETE! (trade in general)
         start = random.choice(list(self.trade_graph.keys()))
@@ -100,6 +102,10 @@ class Sophistication(arcade.Window):
             trader_info = tdef["traders"][closest_tile[0].struct_level]
             trader = Trader(trader_info["img"], start, end, trader_info["speed"])
             self.traders.append(trader)
+            print(start, end)
+            return True
+        else:
+            return False
 
     def prepare_tile_list(self):
         """
@@ -144,6 +150,10 @@ class Sophistication(arcade.Window):
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
         arcade.draw_text(score_text, self.view_left+400, self.view_bottom+480, arcade.color.BLACK, 14) # addition in position keeps the score stable, stops it drifting
+
+        #display player position
+        pos_text = f"x: {int(self.player.center_x)}, y: {int(self.player.center_y)}"
+        arcade.draw_text(pos_text, self.view_left+10, self.view_bottom+480, arcade.color.BLACK, 14)
 
         # game over mechanics
         if self.game_over:
@@ -230,4 +240,6 @@ class Sophistication(arcade.Window):
 
 if __name__ == "__main__":
     game = Sophistication("map16.csv", "csv", "./default")
+    while not game.gen_trader():
+        game.gen_trader()
     arcade.run()

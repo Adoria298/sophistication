@@ -18,7 +18,7 @@ class Trader(arcade.Sprite):
             - end: coords to end at.
             - speed: pixels/frame
         """
-        super().__init__(filename=figure)
+        super().__init__(filename=figure, scale=TILE_SCALING)
 
         self.center_x, self.center_y = start
         self.end = end
@@ -34,3 +34,5 @@ class Trader(arcade.Sprite):
             self.center_y += self.speed
         else:
             self.kill()
+        self.center_x += self.change_x
+        self.center_y += self.change_y
