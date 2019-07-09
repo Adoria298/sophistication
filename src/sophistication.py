@@ -28,7 +28,7 @@ class Sophistication(arcade.Window):
         *mods_to_load : valid mods that should be loaded. Game will crash if
          a mod is not valid.
         """
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, fullscreen=False, resizable=False)
 
         arcade.set_background_color(arcade.color.BANANA_MANIA) # when the map runs out
 
