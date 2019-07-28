@@ -29,9 +29,10 @@ class Trader(arcade.Sprite):
         Moves the sprite.
         INCOMPLETE.
         """
+        super().update()
         if self.center_x != self.end[0] and self.center_y != self.end[1]:
-            self.center_x += self.speed
-            self.center_y += self.speed
+            self.center_x += self.speed / 2
+            self.center_y += self.speed / 2
         else:
             self.kill()
         self.center_x += self.change_x

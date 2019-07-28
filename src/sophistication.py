@@ -133,7 +133,7 @@ class Sophistication(arcade.Window):
                     # because the score updates itself upon development.
             #also used to generate traders
             if random.randint(0, 10) > 5:
-                self.gen_trader()
+                print(self.gen_trader())
 
     def on_draw(self):
         """
@@ -143,7 +143,7 @@ class Sophistication(arcade.Window):
 
         # draw map and player, as well as any traders
         self.tile_list.draw()
-        self.traders.draw
+        self.traders.draw()
         self.player.draw()
 
 
@@ -239,7 +239,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map16.csv", "csv", "./default")
-    while not game.gen_trader():
-        game.gen_trader()
+    game = Sophistication("map.csv", "csv", "./default")
     arcade.run()
