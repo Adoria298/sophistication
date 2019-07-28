@@ -21,7 +21,7 @@ class Sophistication(arcade.Window):
     """
     A game of Sophistication. No glamour.
     """
-    def __init__(self, map_file, map_type="csv", *mods_to_load=["./default"]):
+    def __init__(self, map_file, map_type="csv", *mods_to_load):
         """
         Initialises a game.
 
@@ -243,5 +243,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map.csv"s)
+    game = Sophistication("map.csv", "csv", "./default")
     arcade.run()
