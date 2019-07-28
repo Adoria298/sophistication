@@ -1,6 +1,6 @@
 import arcade
 
-from constants import TILE_SCALING
+from constants import TRADER_SCALING
 
 class Trader(arcade.Sprite):
     """
@@ -18,7 +18,7 @@ class Trader(arcade.Sprite):
             - end: coords to end at.
             - speed: pixels/frame
         """
-        super().__init__(filename=figure, scale=TILE_SCALING)
+        super().__init__(filename=figure, scale=TRADER_SCALING)
 
         self.center_x, self.center_y = start
         self.end = end
@@ -29,10 +29,10 @@ class Trader(arcade.Sprite):
         Moves the sprite.
         INCOMPLETE.
         """
-        super().update()
+        
         if self.center_x != self.end[0] and self.center_y != self.end[1]:
-            self.center_x += self.speed / 2
-            self.center_y += self.speed / 2
+            self.center_x += self.speed
+            self.center_y += self.speed
         else:
             self.kill()
         self.center_x += self.change_x
