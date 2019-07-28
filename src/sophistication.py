@@ -21,11 +21,15 @@ class Sophistication(arcade.Window):
     """
     A game of Sophistication. No glamour.
     """
-    def __init__(self, map_file, map_type="csv", *mods_to_load):
+    def __init__(self, map_file, map_type="csv", *mods_to_load=["./default"]):
         """
         Initialises a game.
-        
-        *mods_to_load : valid mods that should be loaded. Game will crash if
+
+        Params:        
+            - map_file: the map to be used
+            - map_type: what format the map is in. default = "csv". Options:
+                - "csv": CSV file, with each element being a tile to be referenced from *mods_to_load
+            - *mods_to_load : valid mods that should be loaded. Game will crash if
          a mod is not valid.
         """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, fullscreen=False, resizable=False)
@@ -239,5 +243,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map.csv", "csv", "./default")
+    game = Sophistication("map.csv"s)
     arcade.run()
