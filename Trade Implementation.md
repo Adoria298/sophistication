@@ -2,7 +2,7 @@
 
 ## Description
 
-Trade is a connection between structures that creates a random visual image representing a trader, which goes between predefined structures. A trade network is represented by coloured lines over tiles that these "traders" move along, in either direction. Upon a structure upgrade, the traders may also upgrade, for example plains/nomads -> villages/merchants -> towns/trains in the default mod. The speed a trader moves at may also change, generally increasing, upon a trader upgrade.
+Trade is a connection between structures that creates a random visual image representing a trader, which goes between predefined structures. A trade network is represented by coloured lines over tiles that these "traders" move along, in either direction. After implementing traders, I(adoria298) feel that traders are made better by their randomness, so they have not been implemented as of 2019-07-29. Upon a structure upgrade, the traders may also upgrade, for example plains/nomads -> villages/merchants -> towns/trains in the default mod. The speed a trader moves at may also change, generally increasing, upon a trader upgrade.
 
 ## Representation by Mods
 

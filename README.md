@@ -10,7 +10,7 @@ Move your player box around the map with the arrow keys. Use the enter key to de
 
 ## Coming Soon
 
-- Trade! A good trade network will advance your empire by itself, as long as it's maintained.
+- A launcher! Ever wanted to choose your own map?
 - God Mode (for advanced players).
 - Pirates! They can decay your empire quite quickly. Be wary!
 - War! Used wisely, works well.
