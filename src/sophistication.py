@@ -2,6 +2,7 @@
 import json
 import csv 
 import os
+import random
 
 # external libraries
 import arcade
@@ -10,6 +11,7 @@ import arcade
 import mods
 from player import Player 
 from tile import Tile
+from trader import Trader
 from constants import *
 
 # sets the working directory to the same directory as where this code is saved.
@@ -22,11 +24,15 @@ class Sophistication(arcade.Window):
     def __init__(self, map_file, map_type="csv", *mods_to_load):
         """
         Initialises a game.
-        
-        *mods_to_load : valid mods that should be loaded. Game will crash if
+
+        Params:        
+            - map_file: the map to be used
+            - map_type: what format the map is in. default = "csv". Options:
+                - "csv": CSV file, with each element being a tile to be referenced from *mods_to_load
+            - *mods_to_load : valid mods that should be loaded. Game will crash if
          a mod is not valid.
         """
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, False)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, fullscreen=False, resizable=False)
 
         arcade.set_background_color(arcade.color.BANANA_MANIA) # when the map runs out
 
@@ -59,6 +65,52 @@ class Sophistication(arcade.Window):
         self.view_bottom = 0
         self.view_left = 0
 
+        # for trade
+        self.trade_graph = self.gen_trade_graph()
+        self.traders = arcade.SpriteList()
+
+    def gen_trade_graph(self):
+        """
+        Populates self.trade_graph with lists of coords attached to other coords.
+        Randomised.
+
+        Assumes the map is a square
+        """
+        max_coord = len(self.map) * 64 -1
+        graph = {}
+        for tile in self.tile_list:
+            routes = []
+            for j in range(random.randint(1, 10)): # never empty
+                routes.append((random.randint(0, max_coord), random.randint(0, max_coord)))
+            graph[(tile.center_x, tile.center_y)] = routes
+        return graph
+        
+    def gen_trader(self):
+        """
+        Generates a trader, tells it the tile it starts at, where it ends, its speed and its form.
+        Adds it to a list of traders.
+
+        Returns True if trader successfully generated
+        """
+        #TODO: COMPLETE! (trade in general)
+        start = random.choice(list(self.trade_graph.keys()))
+        end = random.choice(self.trade_graph[start])
+
+        ps = arcade.Sprite() # placeholder sprite
+        ps.center_x, ps.center_y = start
+        closest_tile = arcade.get_closest_sprite(ps, self.tile_list)
+        ps.kill() # not needed anymore
+
+        tdef = self.tile_defs[closest_tile[0].symbol] # tile def for the closest tile
+        if "traders" in tdef: # in case traders aren't defined
+            trader_info = tdef["traders"][closest_tile[0].struct_level]
+            trader = Trader(trader_info["img"], start, end, trader_info["speed"])
+            self.traders.append(trader)
+            print(start, end)
+            return True
+        else:
+            return False
+
     def prepare_tile_list(self):
         """
         Adds every tile to self.tile_list as a Tile instance.
@@ -72,7 +124,10 @@ class Sophistication(arcade.Window):
                 
                 self.tile_list.append(tile)
                 
-    def gen_score(self):
+    def gen_slow_events(self):
+        """
+        Generates score and traders.
+        """
         # scores only updated every now and then.
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
             for tile in self.tile_list:
@@ -80,7 +135,9 @@ class Sophistication(arcade.Window):
                     self.score += tile.score_mod  
                     # only update the score if the tile has just regressed, 
                     # because the score updates itself upon development.
-        
+            #also used to generate traders
+            if random.randint(0, 10) > 5:
+                print(self.gen_trader())
 
     def on_draw(self):
         """
@@ -88,14 +145,19 @@ class Sophistication(arcade.Window):
         """
         arcade.start_render()
 
-        # draw map and player
+        # draw map and player, as well as any traders
         self.tile_list.draw()
+        self.traders.draw()
         self.player.draw()
 
 
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
         arcade.draw_text(score_text, self.view_left+400, self.view_bottom+480, arcade.color.BLACK, 14) # addition in position keeps the score stable, stops it drifting
+
+        #display player position
+        pos_text = f"x: {int(self.player.center_x)}, y: {int(self.player.center_y)}"
+        arcade.draw_text(pos_text, self.view_left+10, self.view_bottom+480, arcade.color.BLACK, 14)
 
         # game over mechanics
         if self.game_over:
@@ -109,7 +171,7 @@ class Sophistication(arcade.Window):
         """
         # for time based scoring
         self.delta_times.append(delta_time)
-        self.gen_score()
+        self.gen_slow_events()
         # all after here stay at the end of the function
         
         # if negative score - empire collapse
@@ -118,6 +180,7 @@ class Sophistication(arcade.Window):
 
         self.player.update(self.map)
         self.tile_list.update()
+        self.traders.update()
 
         # scrolling
         #TODO(adoria298): Allow the 16th column to be seen.
@@ -180,5 +243,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map16.csv", "csv", "./default")
+    game = Sophistication("map.csv", "csv", "./default")
     arcade.run()

@@ -5,6 +5,7 @@ VIEWPORT_MARGIN = 0 # how far the player can be from the edge
 
 # Sprite constants
 TILE_SCALING = 0.5
+TRADER_SCALING = 2.0
 ## Player constants
 PLAYER_SCALING = 0.5
 MOVEMENT_SPEED = 64

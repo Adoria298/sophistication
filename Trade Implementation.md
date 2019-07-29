@@ -20,12 +20,12 @@ Much like structures, trade networks are represented under the `trade` object in
                 "speed": 8 // speed the trader moves at
             },
             {
-                "img": "merchant.png",
+                "img": "merchants.png",
                 "speed": 16
             },
             {
                 "img": "train.png",
-                "speed": 32 // player speed
+                "speed": 32 // half player speed
             }
         ],
         "colour": "#F60678" // a nice pinky-purple
@@ -35,4 +35,4 @@ Much like structures, trade networks are represented under the `trade` object in
 
 ## Internal Code Representation
 
-Tiles will need to know which tiles they can trade with. This could be done by a linked list, perhaps.
+Tiles will need to know which tiles they can trade with. This could be done by a linked list or a graph, perhaps.

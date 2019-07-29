@@ -29,13 +29,15 @@ def load_mod(folder_path):
     namespace_defs[mod["soph_namespace"]] = folder_path
     mod_tile_defs = mod["tile_defs"]
     # TODO(adoria298): Put this bit into some functions
-    # creates full path to each tile image
+    # creates full path to each image under the types named in images
+    images = ["struct", "traders"]
     for tile_sym in mod_tile_defs:
         tile_def = mod_tile_defs[tile_sym]
-        if tile_def.get("struct", False):
-            for struct in tile_def["struct"]:
-                if struct != None:
-                    struct["img"] = os.path.abspath(f"{folder_path}/{struct['img']}")
+        for image in images:
+            if tile_def.get(image, False):
+                for el in tile_def[image]: #short for element
+                    if el != None:
+                        el["img"] = os.path.abspath(f"{folder_path}/{el['img']}")
     tile_defs.update(mod_tile_defs)
     
     
