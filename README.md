@@ -4,7 +4,7 @@ A game about creating an empire in a lonely 8x8 tiled world.
 
 ---
 
-## Run from provide ZIP file
+## Run from provided ZIP file
 
 1. Extract ZIP file.
 2. Install Python(minimum 3.6) from [www.python.org](https://www.python.org).
@@ -24,4 +24,4 @@ Move your player box around the map with the arrow keys. Use the enter key to de
 - God Mode (for advanced players).
 - Pirates! They can decay your empire quite quickly. Be wary!
 - War! Used wisely, works well.
-- Larger World! Potentially infinite empires!
+- Procedural generation, upon request! Stop playing in the same world all the time!
