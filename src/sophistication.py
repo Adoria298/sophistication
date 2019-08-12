@@ -177,46 +177,46 @@ class Sophistication(arcade.Window):
         # if negative score - empire collapse
         if self.score < 0:
             self.game_over = True
+        else: # things that happen with a functioning empire
+            self.player.update(self.map)
+            self.tile_list.update()
+            self.traders.update()
 
-        self.player.update(self.map)
-        self.tile_list.update()
-        self.traders.update()
+            # scrolling
+            #TODO(adoria298): Allow the 16th column to be seen.
+            #TODO(adoria298): stop bounce back on the far right
 
-        # scrolling
-        #TODO(adoria298): Allow the 16th column to be seen.
-        #TODO(adoria298): stop bounce back on the far right
+            changed = False
 
-        changed = False
+            # Scroll left
+            left_bndry = self.view_left + VIEWPORT_MARGIN
+            if self.player.left < left_bndry:
+                self.view_left -= left_bndry - self.player.left
+                changed = True
 
-        # Scroll left
-        left_bndry = self.view_left + VIEWPORT_MARGIN
-        if self.player.left < left_bndry:
-            self.view_left -= left_bndry - self.player.left
-            changed = True
+            # Scroll right
+            right_bndry = self.view_left + SCREEN_WIDTH - VIEWPORT_MARGIN
+            if self.player.right > right_bndry:
+                self.view_left += self.player.right - right_bndry
+                changed = True
 
-        # Scroll right
-        right_bndry = self.view_left + SCREEN_WIDTH - VIEWPORT_MARGIN
-        if self.player.right > right_bndry:
-            self.view_left += self.player.right - right_bndry
-            changed = True
+            # Scroll up
+            top_bndry = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
+            if self.player.top > top_bndry:
+                self.view_bottom += self.player.top - top_bndry
+                changed = True
 
-        # Scroll up
-        top_bndry = self.view_bottom + SCREEN_HEIGHT - VIEWPORT_MARGIN
-        if self.player.top > top_bndry:
-            self.view_bottom += self.player.top - top_bndry
-            changed = True
+            # Scroll down
+            bottom_bndry = self.view_bottom + VIEWPORT_MARGIN
+            if self.player.bottom < bottom_bndry:
+                self.view_bottom -= bottom_bndry - self.player.bottom
+                changed = True
 
-        # Scroll down
-        bottom_bndry = self.view_bottom + VIEWPORT_MARGIN
-        if self.player.bottom < bottom_bndry:
-            self.view_bottom -= bottom_bndry - self.player.bottom
-            changed = True
-
-        if changed:
-            arcade.set_viewport(self.view_left,
-                                SCREEN_WIDTH + self.view_left,
-                                self.view_bottom,
-                                SCREEN_HEIGHT + self.view_bottom)
+            if changed:
+                arcade.set_viewport(self.view_left,
+                                    SCREEN_WIDTH + self.view_left,
+                                    self.view_bottom,
+                                    SCREEN_HEIGHT + self.view_bottom)
 
         self.on_draw()
 
