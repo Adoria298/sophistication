@@ -9,3 +9,7 @@ TRADER_SCALING = 2.0
 ## Player constants
 PLAYER_SCALING = 0.5
 MOVEMENT_SPEED = 64
+
+# Internal Messaging System (sockets) Constants
+INTERN_MSG_HOST = '127.0.0.1'
+INTERN_MSG_PORT = '5001' # flask uses port 5000
