@@ -2,7 +2,11 @@
 Based on https://www.realpython.com/python-sockets .
 Used to communicate between classes, internally.
 """
-import sockets
+import sys
+import selectors
+import json
+import io
+import struct
 
 class _Message:
     pass
