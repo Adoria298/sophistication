@@ -81,7 +81,7 @@ class Sophistication(arcade.Window):
         for tile in self.tile_list:
             routes = []
             for j in range(random.randint(1, 10)): # never empty
-                routes.append((random.randint(0, max_coord), random.randint(0, max_coord)))
+                routes.append((random.randint(j, max_coord), random.randint(j, max_coord)))
             graph[(tile.center_x, tile.center_y)] = routes
         return graph
         
@@ -130,14 +130,14 @@ class Sophistication(arcade.Window):
         """
         # scores only updated every now and then.
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
-            for tile in self.tile_list:
+            # used to generate traders
+            if random.randint(0, 10) > 5:
+                print(self.gen_trader())
+        for tile in self.tile_list:
                 if tile.mode == "regressed":
                     self.score += tile.score_mod  
                     # only update the score if the tile has just regressed, 
                     # because the score updates itself upon development.
-            #also used to generate traders
-            if random.randint(0, 10) > 5:
-                print(self.gen_trader())
 
     def on_draw(self):
         """
