@@ -66,26 +66,6 @@ class Sophistication(arcade.Window):
         #for scrolling
         self.view_bottom = 0
         self.view_left = 0
-
-        # for trade
-        self.trade_graph = self.gen_trade_graph()
-        self.traders = arcade.SpriteList()
-
-    def gen_trade_graph(self):
-        """
-        Populates self.trade_graph with lists of coords attached to other coords.
-        Randomised.
-
-        Assumes the map is a square
-        """
-        max_coord = len(self.map) * TILE_LEN - 1
-        graph = {}
-        for tile in self.tile_list:
-            routes = []
-            for j in range(random.randint(1, 10)): # never empty
-                routes.append((random.randint(j, max_coord), random.randint(j, max_coord)))
-            graph[(tile.center_x, tile.center_y)] = routes
-        return graph
         
     def gen_trader(self):
         """
@@ -133,8 +113,8 @@ class Sophistication(arcade.Window):
         # scores only updated every now and then.
         if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
             # used to generate traders
-            if random.randint(0, 10) > 5:
-                print(self.gen_trader())
+            #if random.randint(0, 10) > 5:
+                #print(self.gen_trader())
         for tile in self.tile_list:
                 if tile.mode == "regressed":
                     self.score += tile.score_mod  
