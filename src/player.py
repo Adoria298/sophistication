@@ -1,5 +1,5 @@
 import arcade
-from constants import SCREEN_LEN, PLAYER_SCALING
+from constants import SCREEN_LEN, PLAYER_SCALING, TILE_LEN
 
 class Player(arcade.Sprite):
     def __init__(self):
