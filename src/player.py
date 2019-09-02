@@ -1,13 +1,13 @@
 import arcade
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_SCALING
 
 class Player(arcade.Sprite):
-    def __init__(self, scaling):
+    def __init__(self):
         """
         Initialises player code. 
         Creates a sprite and centers it on (160, 160).
         """
-        super().__init__("player.png", scaling)
+        super().__init__("player.png", PLAYER_SCALING)
         self.center_x = 160
         self.center_y = 160
 

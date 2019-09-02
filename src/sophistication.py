@@ -12,7 +12,8 @@ import mods
 from player import Player 
 from tile import Tile
 from trader import Trader
-from constants import *
+from constants import (SCREEN_LEN, GAME_TITLE, VIEWPORT_MARGIN, TILE_LEN,
+                         MOVEMENT_SPEED)
 
 # sets the working directory to the same directory as where this code is saved.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -32,9 +33,10 @@ class Sophistication(arcade.Window):
             - *mods_to_load : valid mods that should be loaded. Game will crash if
          a mod is not valid.
         """
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE, fullscreen=False, resizable=False)
+        super().__init__(width=SCREEN_LEN, height=SCREEN_HEIGHT,
+                            title=GAME_TITLE, fullscreen=False, resizable=False)
 
-        arcade.set_background_color(arcade.color.BANANA_MANIA) # when the map runs out
+        arcade.set_background_color(arcade.color.BANANA_MANIA) # for when the map runs out
 
         # mod loading
         for mod in mods_to_load:
@@ -59,7 +61,7 @@ class Sophistication(arcade.Window):
         self.game_over = False
 
         # initialises the player
-        self.player = Player(PLAYER_SCALING)
+        self.player = Player()
 
         #for scrolling
         self.view_bottom = 0
@@ -76,7 +78,7 @@ class Sophistication(arcade.Window):
 
         Assumes the map is a square
         """
-        max_coord = len(self.map) * 64 -1
+        max_coord = len(self.map) * TILE_LEN - 1
         graph = {}
         for tile in self.tile_list:
             routes = []
@@ -119,8 +121,8 @@ class Sophistication(arcade.Window):
         for row_index, row in enumerate(self.map):
             for symbol_index, symbol in enumerate(row):
                 tile = Tile(symbol, self.tile_defs)               
-                tile.right = (1 + symbol_index) * 64
-                tile.top = (8 - row_index) * 64 
+                tile.right = (1 + symbol_index) * TILE_LEN
+                tile.top = (8 - row_index) * TILE_LEN 
                 
                 self.tile_list.append(tile)
                 
@@ -153,11 +155,14 @@ class Sophistication(arcade.Window):
 
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
-        arcade.draw_text(score_text, self.view_left+400, self.view_bottom+480, arcade.color.BLACK, 14) # addition in position keeps the score stable, stops it drifting
+        arcade.draw_text(score_text, self.view_left+400, 
+                        self.view_bottom+480, arcade.color.BLACK, 14) 
+                        # addition in position keeps the score stable, stops it drifting
 
         #display player position
         pos_text = f"x: {int(self.player.center_x)}, y: {int(self.player.center_y)}"
-        arcade.draw_text(pos_text, self.view_left+10, self.view_bottom+480, arcade.color.BLACK, 14)
+        arcade.draw_text(pos_text, self.view_left+10, self.view_bottom+480, 
+                            arcade.color.BLACK, 14)
 
         # game over mechanics
         if self.game_over:
