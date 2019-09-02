@@ -99,11 +99,9 @@ class Sophistication(arcade.Window):
         """
         arcade.start_render()
 
-        # draw map and player, as well as any traders
+        # draw map and player
         self.tile_list.draw()
-        self.traders.draw()
         self.player.draw()
-
 
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
