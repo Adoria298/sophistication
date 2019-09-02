@@ -1,5 +1,5 @@
 import arcade
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_SCALING
+from constants import SCREEN_LEN, PLAYER_SCALING
 
 class Player(arcade.Sprite):
     def __init__(self):
@@ -21,8 +21,8 @@ class Player(arcade.Sprite):
         (bouncing).
         """
 
-        x = self.center_x // 64
-        y = self.center_y // 64
+        x = self.center_x // TILE_LEN
+        y = self.center_y // TILE_LEN
       
         self.center_x += self.change_x
         self.center_y += self.change_y   
@@ -36,8 +36,8 @@ class Player(arcade.Sprite):
             if self.left < 0:
                 self.left = 0
             
-            if self.right > SCREEN_WIDTH - 1:
-                self.right = SCREEN_WIDTH
+            if self.right > SCREEN_LEN - 1:
+                self.right = SCREEN_LEN
 
             
             # prevents y-axis bouncing
@@ -46,8 +46,8 @@ class Player(arcade.Sprite):
             if self.bottom < 0:
                 self.bottom = 0
             """
-            if self.top > SCREEN_HEIGHT - 1:
-                self.top = SCREEN_HEIGHT
+            if self.top > SCREEN_LEN - 1:
+                self.top = SCREEN_LEN
        
         self.change_x = 0
         self.change_y = 0
