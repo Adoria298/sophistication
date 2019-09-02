@@ -135,7 +135,6 @@ class Sophistication(arcade.Window):
 
         self.player.update(self.map)
         self.tile_list.update()
-        self.traders.update()
 
         # scrolling
         #TODO(adoria298): Allow the 16th column to be seen.

@@ -125,6 +125,7 @@ class Tile(arcade.Sprite):
 
     def update(self):
         super().update()
+        self.traders.update()
 
         if self.score_mod != 0:
             self.score_mod = 0
