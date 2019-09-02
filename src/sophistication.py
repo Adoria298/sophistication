@@ -66,32 +66,6 @@ class Sophistication(arcade.Window):
         #for scrolling
         self.view_bottom = 0
         self.view_left = 0
-        
-    def gen_trader(self):
-        """
-        Generates a trader, tells it the tile it starts at, where it ends, its speed and its form.
-        Adds it to a list of traders.
-
-        Returns True if trader successfully generated
-        """
-        #TODO: COMPLETE! (trade in general)
-        start = random.choice(list(self.trade_graph.keys()))
-        end = random.choice(self.trade_graph[start])
-
-        ps = arcade.Sprite() # placeholder sprite
-        ps.center_x, ps.center_y = start
-        closest_tile = arcade.get_closest_sprite(ps, self.tile_list)
-        ps.kill() # not needed anymore
-
-        tdef = self.tile_defs[closest_tile[0].symbol] # tile def for the closest tile
-        if "traders" in tdef: # in case traders aren't defined
-            trader_info = tdef["traders"][closest_tile[0].struct_level]
-            trader = Trader(trader_info["img"], start, end, trader_info["speed"])
-            self.traders.append(trader)
-            print(start, end)
-            return True
-        else:
-            return False
 
     def prepare_tile_list(self):
         """
@@ -110,11 +84,9 @@ class Sophistication(arcade.Window):
         """
         Generates score and traders.
         """
-        # scores only updated every now and then.
-        if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
-            # used to generate traders
-            #if random.randint(0, 10) > 5:
-                #print(self.gen_trader())
+        # for occasional occurings
+        #if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
+            #pass
         for tile in self.tile_list:
                 if tile.mode == "regressed":
                     self.score += tile.score_mod  

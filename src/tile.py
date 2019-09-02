@@ -1,3 +1,5 @@
+import random
+
 import arcade
 
 from constants import TILE_SCALING
@@ -20,8 +22,9 @@ class Tile(arcade.Sprite):
 
         self.symbol = symbol
         self.tile_def = tile_defs[symbol].copy()
-        self.struct_def = self.tile_def["struct"]
-        self.struct_level = 0 # texture level as well
+        self.struct_def = self.tile_def["struct"] # mandatory
+        self.struct_level = 0 # texture & tile level as well
+        self.trader_def = self.tile_def.get("trade", None)
 
         self.mode = "stasis"
 
@@ -31,6 +34,10 @@ class Tile(arcade.Sprite):
 
         self._update_struct(
             self.struct_def[self.struct_level].get("imm_score", 0), apply_imm_score=True)
+        
+        # trade
+        self.trade_graph = []
+        self.traders = arcade.SpriteList()
 
     def develop(self, curr_score):
         """
@@ -83,6 +90,7 @@ class Tile(arcade.Sprite):
         elif negate_imm_score:
             self.score_mod = -1/2 * imm_score
         self.time = self.struct_def[self.struct_level].get("time", 0)
+        self.max_traders = self.struct_def[self.struct_level].get("max_traders", 0)
         
     def get_time(self):
         """
@@ -92,17 +100,38 @@ class Tile(arcade.Sprite):
         self.time -= curr_struct.get("decrease", 0)
         return self.time
 
+    def gen_trader(self):
+        """
+        Generates a trader, tells it the tile it starts at, where it ends, its speed and its form.
+        Adds it to a list of traders.
+
+        Returns True if trader successfully generated.
+        """
+        #TODO: COMPLETE! (trade in general)
+        if len(self.trade_graphs) >= 1:
+            start = (self.center_x, self.center_y)
+            end = random.choice(self.trade_graph[start])
+        else:
+            return False # can't generate a trader if it has no place to go
+
+        if self.trader_def: # in case traders aren't defined
+            trader_info = self.trader_def["traders"][self.struct_level]
+            trader = Trader(trader_info["img"], start, end, trader_info["speed"])
+            self.traders.append(trader)
+            print(start, end)
+            return True
+        else:
+            return False
+
     def update(self):
         super().update()
 
         if self.score_mod != 0:
             self.score_mod = 0
+        
         self.mode = "stasis"
         self.get_time()
         self.regress() # if necessary
 
-        
-        
-
-if __name__ == "__main__":
-    tile = Tile("U")
+        if len(self.traders) < self.max_traders: # if possible
+            self.gen_trader()

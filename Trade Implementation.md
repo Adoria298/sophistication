@@ -8,7 +8,7 @@ The player decides between which tiles traders move by pressing `T` and navigati
 
 ## Representation by Mods
 
-Much like structures, trade networks are represented under the `trade` object in a tile definition. Any values not given are assumed to be zero.
+Much like structures, trade networks are represented under the `trade` object in a tile definition. Any values not given are assumed to be zero. If no traders are defined, no trade shall be done.
 
 ### Example
 
