@@ -138,6 +138,6 @@ class Tile(arcade.Sprite):
         if len(self.traders) < self.max_traders: # if possible
             self.gen_trader()
 
-    def on_draw(self):
-        super().on_draw()
+    def draw(self):
+        super().draw()
         self.traders.draw()
