@@ -62,7 +62,10 @@ class Sophistication(arcade.Window):
 
         # initialises the player
         self.player = Player()
-
+        ## how the player interacts with the world
+        self.mode = "default"
+        self.new_trade_route = arcade.SpriteList()
+        
         #for scrolling
         self.view_bottom = 0
         self.view_left = 0
@@ -108,11 +111,17 @@ class Sophistication(arcade.Window):
         arcade.draw_text(score_text, self.view_left+400, 
                         self.view_bottom+480, arcade.color.BLACK, 14) 
                         # addition in position keeps the score stable, stops it drifting
+                        # drawn in the upper right
 
         #display player position
         pos_text = f"x: {int(self.player.center_x)}, y: {int(self.player.center_y)}"
         arcade.draw_text(pos_text, self.view_left+10, self.view_bottom+480, 
-                            arcade.color.BLACK, 14)
+                            arcade.color.BLACK, 14) # drawn in the upper left
+
+        # indicate player mode
+        mode_text = f"Mode: {self.mode}"
+        arcade.draw_text(mode_text, self.view_left+195, self.view_bottom+480,
+                            arcade.color.BLACK, 14) # drawn in the middle
 
         # game over mechanics
         if self.game_over:
@@ -176,7 +185,12 @@ class Sophistication(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """
-        Called upon key press.
+        Called upon key press. 
+
+        Listens for:
+         - UP/DOWN/LEFT/RIGHT: player movement
+         - ENTER: development/trade network creation
+         - T: toggle "trade" mode
         """
         # player movement
         if key == arcade.key.UP:
@@ -188,10 +202,32 @@ class Sophistication(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.player.change_x = MOVEMENT_SPEED
         elif key == arcade.key.ENTER:
-            # on enter develop the structure
             closest_tile = arcade.get_closest_sprite(self.player, self.tile_list)[0] # second element is its distance to the player
-            if closest_tile.develop(self.score): # if tile developed, apply the immediate score
-                self.score += closest_tile.score_mod
+            if self.mode=="default":
+                # on enter develop the structure
+                if closest_tile.develop(self.score): # if tile developed, apply the immediate score
+                    self.score += closest_tile.score_mod
+            elif self.mode=="trade":
+                # on enter create a trade route
+                if len(self.new_trade_route) == 1:
+                    print("Ending trade route")
+                    start = self.new_trade_route[0]
+                    start.trade_routes.append(closest_tile.position)
+                    self.new_trade_route = arcade.SpriteList()
+                elif len(self.new_trade_route) == 0:
+                    print("Starting trade route")
+                    self.new_trade_route.append(closest_tile) # start of the trade route
+                else:
+                    print(f"len of self.new_trade_route: {len(self.new_trade_route)}!")  
+            else:
+                print("Unrecognised action: ", self.mode)
+        elif key == arcade.key.T:
+            # toggle trade mode
+            if self.mode == "trade":
+                self.mode = "default"
+            else: # in case of other modes
+                self.mode = "trade"
+                self.new_trade_route = arcade.SpriteList()
         
         #TODO(adoria298): add save logic
 

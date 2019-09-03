@@ -30,14 +30,19 @@ def load_mod(folder_path):
     mod_tile_defs = mod["tile_defs"]
     # TODO(adoria298): Put this bit into some functions
     # creates full path to each image under the types named in images
-    images = ["struct", "traders"]
-    for tile_sym in mod_tile_defs:
-        tile_def = mod_tile_defs[tile_sym]
-        for image in images:
-            if tile_def.get(image, False):
-                for el in tile_def[image]: #short for element
-                    if el != None:
-                        el["img"] = os.path.abspath(f"{folder_path}/{el['img']}")
+    images = ["struct", "trade"]
+    for tile_sym in mod_tile_defs: # for each tile defined
+        tile_def = mod_tile_defs[tile_sym] # tile definition of this tile
+        for image in images: # areas to find images
+            if tile_def.get(image, False): # check it exists
+                if tile_def[image] != None:
+                    if image == "struct":
+                        for el in tile_def[image]: # short for element
+                            el["img"] = os.path.abspath(f"{folder_path}/{el['img']}")
+                    elif image == "trade": # also have 'colour' element in the trade section
+                        if tile_def[image].get("traders", False):
+                            for eel in tile_def[image]["traders"]:
+                                eel["img"] = os.path.abspath(f"{folder_path}/{eel['img']}")
     tile_defs.update(mod_tile_defs)
     
     

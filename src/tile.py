@@ -3,6 +3,7 @@ import random
 import arcade
 
 from constants import TILE_SCALING
+from trader import Trader
 
 
 class Tile(arcade.Sprite):
@@ -36,7 +37,7 @@ class Tile(arcade.Sprite):
             self.struct_def[self.struct_level].get("imm_score", 0), apply_imm_score=True)
         
         # trade
-        self.trade_graph = []
+        self.trade_routes = []
         self.traders = arcade.SpriteList()
 
     def develop(self, curr_score):
@@ -108,9 +109,9 @@ class Tile(arcade.Sprite):
         Returns True if trader successfully generated.
         """
         #TODO: COMPLETE! (trade in general)
-        if len(self.trade_graphs) >= 1:
+        if len(self.trade_routes) >= 1:
             start = (self.center_x, self.center_y)
-            end = random.choice(self.trade_graph[start])
+            end = random.choice(self.trade_routes)
         else:
             return False # can't generate a trader if it has no place to go
 
