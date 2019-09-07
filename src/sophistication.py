@@ -240,5 +240,5 @@ class Sophistication(arcade.Window):
 
 
 if __name__ == "__main__":
-    game = Sophistication("map.csv", "csv", "./default")
+    game = Sophistication("map16.csv", "csv", "./default")
     arcade.run()

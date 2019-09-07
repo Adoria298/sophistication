@@ -46,6 +46,7 @@ class Trader(arcade.Sprite):
             self.center_x += self.speed * b
             self.center_y += self.speed * b
         else:
+            print(f"Finished! At: ({self.center_x}, {self.center_y})" )
             self.kill()
         self.center_x += self.change_x
         self.center_y += self.change_y

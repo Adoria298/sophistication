@@ -30,16 +30,16 @@
 				"traders": [
 					{
 						"img": "images/plains/traders/nomad.png",
-						"speed": 12
+						"speed": 6
 					},
 					{
 						"img": "images/plains/traders/merchants.png",
-						"speed": 24,
+						"speed": 12,
 						"regress_delay": 1
 					},
 					{
 						"img": "images/plains/traders/train.png",
-						"speed": 48,
+						"speed": 24,
 						"regress_delay": 2
 					}
 				],
