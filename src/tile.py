@@ -115,6 +115,9 @@ class Tile(arcade.Sprite):
         else:
             return False # can't generate a trader if it has no place to go
 
+        if len(self.traders) >= self.max_traders:
+            return False # too many traders
+
         if self.trader_def: # in case traders aren't defined
             trader_info = self.trader_def["traders"][self.struct_level]
             trader = Trader(trader_info["img"], start, end, trader_info["speed"])
@@ -126,7 +129,6 @@ class Tile(arcade.Sprite):
 
     def update(self):
         super().update()
-        self.traders.update()
 
         if self.score_mod != 0:
             self.score_mod = 0
@@ -135,9 +137,3 @@ class Tile(arcade.Sprite):
         self.get_time()
         self.regress() # if necessary
 
-        if len(self.traders) < self.max_traders: # if possible
-            self.gen_trader()
-
-    def draw(self):
-        super().draw()
-        self.traders.draw()

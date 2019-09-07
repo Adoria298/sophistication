@@ -88,8 +88,8 @@ class Sophistication(arcade.Window):
         Generates score and traders.
         """
         # for occasional occurings
-        #if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
-            #pass
+        if int(sum(self.delta_times)) > int(sum(self.delta_times[:-1])):
+            random.choice(self.tile_list).gen_trader()
         for tile in self.tile_list:
                 if tile.mode == "regressed":
                     self.score += tile.score_mod  
@@ -105,6 +105,10 @@ class Sophistication(arcade.Window):
         # draw map and player
         self.tile_list.draw()
         self.player.draw()
+
+        # draws traders
+        for tile in self.tile_list:
+            tile.traders.draw()
 
         # display score
         score_text = f"Score: {int(self.score)}" # remove decimal place from score.
@@ -144,6 +148,9 @@ class Sophistication(arcade.Window):
 
         self.player.update(self.map)
         self.tile_list.update()
+
+        for tile in self.tile_list:
+            tile.traders.update()
 
         # scrolling
         #TODO(adoria298): Allow the 16th column to be seen.
